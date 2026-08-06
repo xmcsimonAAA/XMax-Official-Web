@@ -1,0 +1,1009 @@
+// 导入必要的模块
+@use "sass:meta";
+@use "sass:string";
+
+/* 全局颜色变量 */
+:root {
+  --color: #2563eb;
+  --rgb-color: 37, 99, 235;
+  --color-white: #ffffff;
+  --color-black: #000000;
+  // --color-gray-100: #f8f8f8;
+  --color-gray-100: #f0f0f0;
+  --color-gray-200: #e5e7eb;
+  --color-gray-300: #d1d5db;
+  --color-gray-350: #adb0b6;
+  --color-gray-400: #9ca3af;
+  --color-gray-500: #6b7280;
+  --color-gray-600: #4b5563;
+  --color-gray-700: #374151;
+  --color-gray-800: #1f2937;
+  --color-gray-900: #111827;
+  --color-red-500: #ef4444;
+  --color-yellow-500: #f59e0b;
+  --color-green-500: #22c55e;
+  --color-blue-500: #3b82f6;
+  --color-indigo-500: #6366f1;
+  --color-purple-500: #8b5cf6;
+  --color-pink-500: #ec4899;
+}
+
+/* 基础样式 */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+html {
+  font-size: 15px;
+}
+body {
+  font-size: 14px;
+  font-family: "PingFang SC", -apple-system, BlinkMacSystemFont, Roboto,
+    "Helvetica Neue", Helvetica, Arial, "Hiragino Sans GB", "Source Han Sans",
+    "Noto Sans CJK Sc", "Microsoft YaHei", "Microsoft Jhenghei", sans-serif;
+  color: var(--color-gray-900);
+}
+image {
+  display: block;
+  -o-object-fit: cover;
+  object-fit: cover;
+  max-width: 100%;
+}
+/* 容器 */
+.container {
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+#translate {
+  // display: none;
+}
+.tag {
+  padding: 4px 8px;
+  border-radius: 4px;
+  background-color: rgba(0, 0, 0, 0.08);
+  font-size: 11px;
+  color: #9ca3af;
+
+  & + .tag {
+    margin-left: 6px;
+  }
+}
+
+/* 显示 */
+.block {
+  display: block;
+}
+
+.inline-block {
+  display: inline-block;
+}
+
+.flex {
+  display: flex;
+}
+
+.inline-flex {
+  display: inline-flex;
+}
+
+.hidden {
+  display: none;
+}
+
+/* Flex 布局 */
+/* 方向 */
+.flex-row {
+  flex-direction: row;
+}
+
+.flex-row-reverse {
+  flex-direction: row-reverse;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.flex-col-reverse {
+  flex-direction: column-reverse;
+}
+
+/* 换行 */
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+.flex-nowrap {
+  flex-wrap: nowrap;
+}
+
+.flex-wrap-reverse {
+  flex-wrap: wrap-reverse;
+}
+
+/* 对齐方式 */
+.flex-row-start,
+.ais {
+  justify-content: flex-start;
+}
+
+.flex-row-end,
+.jcfe {
+  justify-content: flex-end;
+}
+
+.flex-row-center,
+.jcc {
+  justify-content: center;
+}
+
+.flex-row-between,
+.jcsb {
+  justify-content: space-between;
+}
+
+.flex-row-around,
+.jcsa {
+  justify-content: space-around;
+}
+
+.flex-row-evenly,
+.jcse {
+  justify-content: space-evenly;
+}
+
+.flex-col-start,
+.aifs {
+  align-items: flex-start;
+}
+
+.flex-col-end,
+.aife {
+  align-items: flex-end;
+}
+
+.flex-col-center,
+.aic {
+  align-items: center;
+}
+
+.flex-col-baseline,
+.aib {
+  align-items: baseline;
+}
+
+.flex-col-stretch,
+.ais {
+  align-items: stretch;
+}
+
+.flex-col-self-start {
+  align-self: flex-start;
+}
+
+.flex-col-self-end {
+  align-self: flex-end;
+}
+
+.flex-col-self-center {
+  align-self: center;
+}
+
+.flex-1 {
+  flex: 1;
+}
+.flex-2 {
+  flex: 2;
+}
+.flex-3 {
+  flex: 3;
+}
+.flex-4 {
+  flex: 4;
+}
+
+/* 颜色 */
+/* 背景颜色 */
+.bg-color {
+  background-color: rgb(var(--color));
+}
+
+.bg-white {
+  background-color: var(--color-white);
+}
+
+.bg-black {
+  background-color: var(--color-black);
+}
+
+.bg-gray-100 {
+  background-color: var(--color-gray-100);
+}
+
+.bg-gray-200 {
+  background-color: var(--color-gray-200);
+}
+
+.bg-gray-300 {
+  background-color: var(--color-gray-300);
+}
+
+.bg-gray-400 {
+  background-color: var(--color-gray-400);
+}
+
+.bg-gray-500 {
+  background-color: var(--color-gray-500);
+}
+
+.bg-gray-600 {
+  background-color: var(--color-gray-600);
+}
+
+.bg-gray-700 {
+  background-color: var(--color-gray-700);
+}
+
+.bg-gray-800 {
+  background-color: var(--color-gray-800);
+}
+
+.bg-gray-900 {
+  background-color: var(--color-gray-900);
+}
+
+.bg-red-500 {
+  background-color: var(--color-red-500);
+}
+
+.bg-yellow-500 {
+  background-color: var(--color-yellow-500);
+}
+
+.bg-green-500 {
+  background-color: var(--color-green-500);
+}
+
+.bg-blue-500 {
+  background-color: var(--color-blue-500);
+}
+
+.bg-indigo-500 {
+  background-color: var(--color-indigo-500);
+}
+
+.bg-purple-500 {
+  background-color: var(--color-purple-500);
+}
+
+.bg-pink-500 {
+  background-color: var(--color-pink-500);
+}
+
+/* 文本颜色 */
+.text-underline {
+  text-decoration: underline;
+}
+.text-color {
+  color: rgb(var(--color));
+}
+
+.text-white {
+  color: var(--color-white);
+}
+
+.text-black {
+  color: var(--color-black);
+}
+
+.text-gray-100 {
+  color: var(--color-gray-100);
+}
+
+.text-gray-200 {
+  color: var(--color-gray-200);
+}
+
+.text-gray-300 {
+  color: var(--color-gray-300);
+}
+
+.text-gray-350 {
+  color: var(--color-gray-350);
+}
+
+.text-gray-400 {
+  color: var(--color-gray-400);
+}
+
+.text-gray-500 {
+  color: var(--color-gray-500);
+}
+
+.text-gray-600 {
+  color: var(--color-gray-600);
+}
+
+.text-gray-700 {
+  color: var(--color-gray-700);
+}
+
+.text-gray-800 {
+  color: var(--color-gray-800);
+}
+
+.text-gray-900 {
+  color: var(--color-gray-900);
+}
+
+.text-red-500 {
+  color: var(--color-red-500);
+}
+
+.text-yellow-500 {
+  color: var(--color-yellow-500);
+}
+
+.text-green-500 {
+  color: var(--color-green-500);
+}
+
+.text-blue-500 {
+  color: var(--color-blue-500);
+}
+
+.text-indigo-500 {
+  color: var(--color-indigo-500);
+}
+
+.text-purple-500 {
+  color: var(--color-purple-500);
+}
+
+.text-pink-500 {
+  color: var(--color-pink-500);
+}
+.lh-1 {
+  line-height: 1;
+}
+.lh-1\/2 {
+  line-height: 1.2;
+}
+.lh-1\/4 {
+  line-height: 1.4;
+}
+.lh-1\/5 {
+  line-height: 1.5;
+}
+
+.lh-1\/6 {
+  line-height: 1.6;
+}
+
+.lh-1\/8 {
+  line-height: 1.8;
+}
+
+.lh-2 {
+  line-height: 2;
+}
+/* 文本样式 */
+.text-left {
+  text-align: left;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-justify {
+  text-align: justify;
+}
+
+// 定义字体粗细映射
+$bold: (
+  100: 100,
+  200: 200,
+  300: 300,
+  400: 400,
+  500: 500,
+  600: 600,
+  700: 700,
+  800: 800,
+  900: 900,
+);
+
+// 生成高度样式类
+@each $key, $value in $bold {
+  .fw-#{$key} {
+    font-weight: $value;
+  }
+}
+// 定义字体大小映射
+$fontSize: (
+  0: 0,
+  6: 6px,
+  7: 7px,
+  8: 8px,
+  9: 9px,
+  10: 10px,
+  11: 11px,
+  12: 12px,
+  13: 13px,
+  14: 14px,
+  15: 15px,
+  16: 16px,
+  17: 17px,
+  18: 18px,
+  20: 20px,
+  24: 24px,
+  26: 26px,
+  28: 28px,
+  30: 30px,
+  32: 32px,
+  34: 34px,
+  36: 36px,
+  38: 38px,
+  40: 40px,
+  42: 42px,
+  44: 44px,
+  46: 46px,
+  48: 48px,
+  50: 50px,
+  64: 64px,
+);
+
+// 生成高度样式类
+@each $key, $value in $fontSize {
+  .text-#{$key} {
+    font-size: $value;
+  }
+}
+/* 圆角 */
+.rounded-none {
+  border-radius: 0;
+}
+
+.rounded-sm {
+  border-radius: 4px;
+}
+
+.rounded {
+  border-radius: 6px;
+}
+
+.rounded-md {
+  border-radius: 8px;
+}
+
+.rounded-lg {
+  border-radius: 1px;
+}
+
+.rounded-xl {
+  border-radius: 12px;
+}
+
+.rounded-2xl {
+  border-radius: 16px;
+}
+
+.rounded-3xl {
+  border-radius: 24px;
+}
+
+.rounded-full {
+  border-radius: 9999px;
+}
+
+.border {
+  --border-color: #f2f2f2;
+  border: 1px solid var(--border-color);
+  &.border-bottom {
+    border-width: 0 0 1px 0;
+  }
+  &.border-top {
+    border-width: 1px 0 0 0;
+  }
+  &.border-left {
+    border-width: 0 0 0 1px;
+  }
+  &.border-right {
+    border-width: 0 1px 0 0;
+  }
+  .border-color {
+    --border-color: rgb(var(--color));
+  }
+  .border-white {
+    --border-color: var(--color-white);
+  }
+}
+.oh {
+  overflow: hidden;
+}
+
+.line-1 {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.line-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.line-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.box-shadow {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+// 定义高度映射
+$heights: (
+  0: 0,
+  4: 4px,
+  8: 8px,
+  12: 12px,
+  16: 16px,
+  18: 18px,
+  20: 20px,
+  24: 24px,
+  26: 26px,
+  28: 28px,
+  30: 30px,
+  32: 32px,
+  34: 34px,
+  36: 36px,
+  38: 38px,
+  40: 40px,
+  42: 42px,
+  44: 44px,
+  46: 46px,
+  48: 48px,
+  50: 50px,
+  52: 52px,
+  56: 56px,
+  60: 60px,
+  64: 64px,
+  68: 68px,
+  72: 72px,
+  76: 76px,
+  80: 80px,
+  96: 96px,
+  100: 100px,
+  110: 110px,
+  120: 120px,
+  128: 1208px,
+  140: 140px,
+  160: 160px,
+  200: 200px,
+  240: 240px,
+  280: 280px,
+  300: 300px,
+  320: 320px,
+  400: 400px,
+  "auto": auto,
+  "full": 100%,
+  "screen": 100vh,
+);
+
+// 生成高度样式类
+@each $key, $value in $heights {
+  .h-#{$key} {
+    height: $value;
+  }
+}
+
+// 定义宽度映射
+$widths: (
+  0: 0,
+  4: 4px,
+  8: 8px,
+  12: 12px,
+  16: 16px,
+  18: 18px,
+  20: 20px,
+  24: 24px,
+  26: 26px,
+  28: 28px,
+  30: 30px,
+  32: 32px,
+  34: 34px,
+  36: 36px,
+  38: 38px,
+  40: 40px,
+  42: 42px,
+  44: 44px,
+  46: 46px,
+  48: 48px,
+  50: 50px,
+  52: 52px,
+  56: 56px,
+  60: 60px,
+  64: 64px,
+  68: 68px,
+  72: 72px,
+  76: 76px,
+  80: 80px,
+  96: 96px,
+  100: 100px,
+  110: 110px,
+  120: 120px,
+  128: 1208px,
+  140: 140px,
+  160: 160px,
+  200: 200px,
+  240: 240px,
+  280: 280px,
+  300: 300px,
+  320: 320px,
+  400: 400px,
+  1\/2: 50%,
+  1\/3: 33.333333%,
+  2\/3: 66.666667%,
+  1\/4: 25%,
+  2\/4: 50%,
+  3\/4: 75%,
+  1\/5: 20%,
+  2\/5: 40%,
+  3\/5: 60%,
+  4\/5: 80%,
+  1\/6: 16.666667%,
+  2\/6: 33.333333%,
+  3\/6: 50%,
+  4\/6: 66.666667%,
+  5\/6: 83.333333%,
+  "auto": auto,
+  "full": 100%,
+  "screen": 100vw,
+);
+
+// 生成宽度样式类
+@each $key, $value in $widths {
+  .w-#{$key} {
+    width: $value;
+  }
+}
+
+// 定义透明度映射
+$opacities: (
+  0: 0,
+  1: 0.1,
+  2: 0.2,
+  3: 0.3,
+  4: 0.4,
+  5: 0.5,
+  6: 0.6,
+  7: 0.7,
+  8: 0.8,
+  9: 0.9,
+  10: 1,
+);
+
+// 生成透明度样式类
+@each $key, $value in $opacities {
+  .o-#{$key} {
+    opacity: $value;
+  }
+}
+// 定义透明度映射
+$zIndex: (
+  -1: -1,
+  0: 0,
+  1: 1,
+  2: 2,
+  3: 3,
+  4: 4,
+  5: 5,
+  6: 6,
+  7: 7,
+  8: 8,
+  9: 9,
+  10: 10,
+  99: 99,
+  100: 100,
+  101: 101,
+  102: 102,
+  999: 999,
+  9999: 9999
+);
+
+// 生成透明度样式类
+@each $key, $value in $zIndex {
+  .z-#{$key} {
+    z-index: $value;
+  }
+}
+
+// 定义内外边距映射
+$space: (
+  0: 0,
+  1: 1px,
+  2: 2px,
+  3: 3px,
+  4: 4px,
+  5: 5px,
+  6: 6px,
+  8: 8px,
+  10: 10px,
+  12: 12px,
+  15: 15px,
+  16: 16px,
+  18: 18px,
+  20: 20px,
+  25: 25px,
+  26: 26px,
+  24: 24px,
+  30: 30px,
+  32: 32px,
+  35: 35px,
+  36: 36px,
+  40: 40px,
+  44: 44px,
+  46: 46px,
+  48: 48px,
+  50: 5px,
+  52: 52px,
+  56: 56px,
+  60: 60px,
+  64: 64px,
+  80: 80px,
+  100: 100px,
+  auto: auto,
+);
+// 生成外边距样式类
+@each $key, $value in $space {
+  .m#{$key} {
+    margin: $value;
+  }
+  .mt#{$key} {
+    margin-top: $value;
+  }
+  .mr#{$key} {
+    margin-right: $value;
+  }
+  .mb#{$key} {
+    margin-bottom: $value;
+  }
+  .ml#{$key} {
+    margin-left: $value;
+  }
+  .mx#{$key} {
+    margin-left: $value;
+    margin-right: $value;
+  }
+  .my#{$key} {
+    margin-top: $value;
+    margin-bottom: $value;
+  }
+
+  .p#{$key} {
+    padding: $value;
+  }
+  .pt#{$key} {
+    padding-top: $value;
+  }
+  .pr#{$key} {
+    padding-right: $value;
+  }
+  .pb#{$key} {
+    padding-bottom: $value;
+  }
+  .pl#{$key} {
+    padding-left: $value;
+  }
+  .px#{$key} {
+    padding-left: $value;
+    padding-right: $value;
+  }
+  .py#{$key} {
+    padding-top: $value;
+    padding-bottom: $value;
+  }
+}
+
+/* 输入框样式，考虑 iOS 和安卓兼容性 */
+input,
+textarea {
+  -webkit-appearance: none; /* 去除 iOS 上的默认样式 */
+  -moz-appearance: none;
+  appearance: none;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  color: var(--color-gray-900);
+  background-color: var(--color-white);
+  border: 0px solid var(--color-gray-300);
+  border-radius: 4px;
+  padding: 8px 12px;
+  transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+
+  &:focus {
+    outline: none;
+    // border-color: var(--color-blue-500);
+    // box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+  }
+
+  &::-webkit-input-placeholder {
+    color: var(--color-gray-400);
+  }
+
+  &::-moz-placeholder {
+    color: var(--color-gray-400);
+  }
+
+  &:-ms-input-placeholder {
+    color: var(--color-gray-400);
+  }
+
+  &::-ms-input-placeholder {
+    color: var(--color-gray-400);
+  }
+
+  &::placeholder {
+    color: var(--color-gray-400);
+  }
+
+  &:disabled {
+    background-color: var(--color-gray-100);
+    cursor: not-allowed;
+  }
+}
+
+// 针对 textarea 单独设置样式
+textarea {
+  resize: vertical;
+  min-height: 80px;
+  overflow-y: auto; /* 确保在安卓设备上滚动正常 */
+}
+
+.pos-r {
+  position: relative;
+}
+.pos-a {
+  position: absolute;
+}
+.pos-f {
+  position: fixed;
+}
+.pos-s {
+  position: -webkit-sticky;
+  position: sticky;
+}
+.l-0 {
+  left: 0;
+}
+.r-0 {
+  right: 0;
+}
+.t-0 {
+  top: 0;
+}
+.b-0 {
+  bottom: 0;
+}
+.t-50p {
+  top: 50%;
+  transform: translateY(-50%); // 垂直居中对齐
+}
+.l-50p {
+  left: 50%;
+  transform: translateX(-50%); // 水平居中对齐
+}
+.l-15 {
+  left: 15px;
+}
+.l-10 {
+  left: 10px;
+}
+
+.xian {
+  transform: scaleX(0.1);
+}
+.mask {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.65);
+  z-index: 99;
+  transition: all ease-in-out 0.3s;
+  opacity: 0;
+  visibility: hidden;
+  &.show {
+    visibility: visible;
+    opacity: 1;
+  }
+}
+
+/* Grid 布局 */
+/* 显示 */
+.grid {
+  display: grid;
+}
+
+.inline-grid {
+  display: inline-grid;
+}
+
+/* 列模板 */
+@for $i from 1 through 12 {
+  .grid-cols-#{$i} {
+    grid-template-columns: repeat(#{$i}, minmax(0, 1fr));
+  }
+}
+
+/* 行模板 */
+@for $i from 1 through 12 {
+  .grid-rows-#{$i} {
+    grid-template-rows: repeat(#{$i}, minmax(0, 1fr));
+  }
+}
+
+/* 列间距 */
+$grid-gaps: (
+  0: 0,
+  2: 2px,
+  4: 4px,
+  6: 6px,
+  8: 8px,
+  10: 10px,
+  12: 12px,
+  16: 16px,
+  20: 20px,
+  24: 24px,
+  32: 32px,
+  40: 40px,
+);
+
+@each $key, $value in $grid-gaps {
+  .gap-x-#{$key} {
+    -moz-column-gap: $value;
+    column-gap: $value;
+  }
+  .gap-y-#{$key} {
+    row-gap: $value;
+  }
+  .gap-#{$key} {
+    gap: $value;
+  }
+}
+
+.progress {
+  --p: 0%;
+  --p-bg-color: 255, 255, 255;
+  --p-bg-opacity: 0.35;
+  --p-color: 255, 255, 255;
+  --p-opacity: 1;
+  --p-height: 8px;
+  height: var(--p-height);
+  width: 100%;
+  background-color: rgba(var(--p-bg-color), var(--p-bg-opacity));
+  border-radius: 100px;
+  overflow: hidden;
+  position: relative;
+  &::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: var(--p);
+    background-color: rgba(var(--p-color), var(--p-opacity));
+    border-radius: 100px;
+    transition: width 0.3s ease-in-out;
+  }
+}

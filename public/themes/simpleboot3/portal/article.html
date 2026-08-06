@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{$article.post_title}</title>
+    <meta
+      name="keywords"
+      content="{$site_info.site_seo_keywords|default=''}" />
+    <meta
+      name="description"
+      content="{$site_info.site_seo_description|default=''}" />
+    <include file="public@head" />
+    <style>
+      .content-box .content div {
+        max-width: 100% !important;
+      }
+      .content-box .content table tr {
+        background: none !important;
+      }
+      .content-box .content img {
+        display: block;
+        max-width: 100% !important;
+        height: auto !important;
+        margin: 1.5rem auto;
+      }
+      .content-box .content table {
+        display: block;
+        width: 100% !important;
+        max-width: 100%;
+        overflow-x: auto;
+        border-collapse: collapse;
+      }
+      .content-box .content th,
+      .content-box .content td {
+        padding: 0.5rem;
+        border: 1px solid #ddd;
+      }
+      .content-box .external-source-link {
+        display: inline-block;
+        margin-top: 1rem;
+        color: var(--color);
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body class="page-page article-page">
+    <include file="public@nav" />
+    <widget name="box1">
+      <div
+        class="box box1 flex aic jcc"
+        style="background-image: url('{:cmf_get_image_url($widget.vars.image)}'); padding-top: calc(64px + 2rem)">
+        <div class="info flex aic jcc">
+          <div class="container text-center">
+            <h2 class="fw-600">{$article.post_title}</h2>
+          </div>
+        </div>
+      </div>
+    </widget>
+    <div style="background-color: #fff">
+      <div class="content-box">
+        <div class="container text-black py-5">
+          <div class="h flex aic">
+            <div class="dian"></div>
+            <if condition="!empty($article.more.external_source)">
+              <div class="by font-bold">
+                <if condition="$article.more.external_source == 'globenewswire'">GlobeNewswire<else />SEC</if>
+              </div>
+              <else />
+              <div class="by font-bold">{$article.original_author}</div>
+            </if>
+            <div class="d-flex ml-3 share">
+              <span>Share</span> <i class="iconfont icon-fenxiang ml-2"></i>
+              <div class="share-box">
+                <a
+                  href="https://facebook.com/sharer/sharer.php?u="
+                  class="facebook">
+                  <i class="iconfont icon-facebook"></i>
+                </a>
+                <a
+                  href="http://twitter.com/share?url="
+                  class="twitter">
+                  <i class="iconfont icon-TwitterX"></i>
+                </a>
+                <a
+                  href="https://linkedin.com/shareArticle?url="
+                  class="linkedin">
+                  <i class="iconfont icon-linkedin"></i>
+                </a>
+                <!-- <a href="mailto:?body=" class="mailto">
+                  <i class="iconfont icon-youxiang1"></i>
+                </a> -->
+              </div>
+            </div>
+            <div class="date font-bold ml-auto">
+              <?php echo date('F j.Y',$article['published_time']); ?>
+            </div>
+          </div>
+          <if condition="!empty($article.more.video)">
+            <div class="flex aic jcc mt-5">
+              <!-- <video
+                controls
+                src="{:cmf_get_image_url($article.more.video)}"
+              ></video> -->
+              <iframe
+                src="{:cmf_get_image_url($article.more.video)}"
+                frameborder="0"></iframe>
+            </div>
+          </if>
+          <if condition="!empty($article.post_content)">
+            <notempty name="article.post_excerpt">
+              <h4
+                class="title mt-5 mb-4 font-bold"
+                style="font-size: 24px; white-space: pre-line; word-wrap: break-word">
+                {$article.post_excerpt}
+              </h4>
+            </notempty>
+            <div class="content">{$article.post_content|raw}</div>
+            <notempty name="article.more.external_url">
+              <a
+                class="external-source-link"
+                href="{$article.more.external_url}"
+                target="_blank"
+                rel="noopener noreferrer"
+                >View original source</a
+              >
+            </notempty>
+            <div class="fujian">
+              <notempty name="article.more.files">
+                <foreach
+                  name="article.more.files"
+                  item="file">
+                  <div class="my-4">
+                    <a
+                      href=" {:cmf_get_file_download_url($file.url)}"
+                      download="{$file.name}"
+                      title="{$file.name}"
+                      style="text-decoration: underline; color: var(--color)"
+                      >{$file.name}</a
+                    >
+                  </div>
+                </foreach>
+              </notempty>
+            </div>
+          </if>
+        </div>
+        <div class="container tuijian">
+          <div class="ranking">
+            <php> $hot_articles=[]; </php>
+            <ul class="row news pb-5">
+              <portal:articles
+                limit="3"
+                order="post.recommended DESC">
+                <php>$top=$key<3?"top3":"";</php>
+                <div class="col-md-6 col-lg-4 mt-3 mt-lg-4 {$top}">
+                  <a
+                    href="{:cmf_url('portal/Article/index',array('id'=>$vo['id']))}"
+                    class="item rounded-xl d-flex flex-col overflow-hidden text-white h-full"
+                    style="border: 1px solid rgb(223, 223, 223, 0.5)">
+                    <div
+                      class="img-box"
+                      style="border-radius: 12px 12px 0 0">
+                      <div
+                        class="img w-full"
+                        style="
+                          border-radius: 12px 12px 0 0;
+                          background-image: url('{:cmf_get_image_url($vo.more.thumbnail)}');
+                        "></div>
+                    </div>
+                    <div class="info p-3 flex-1 w-full d-flex flex-col bg-white text-black">
+                      <div class="flex-1">
+                        <div class="flex aic jcsb">
+                          <!--<span class="text-red-500">Viewpoint</span>-->
+                          <span><?php echo date('F j.Y', $vo['published_time']); ?></span>
+                        </div>
+                        <h2 class="text-18 mt-3 mb-2 line-1">{$vo.post_title}</h2>
+                        <p class="mb-4 lh-1/6 line-1">{$vo.post_excerpt}</p>
+                      </div>
+                      <i class="iconfont icon-outline-arrow-right-3 text-28"></i>
+                    </div>
+                  </a>
+                </div>
+              </portal:articles>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <include file="public@footer" />
+    <include file="public@scripts" />
+    <hook name="before_body_end" />
+    <script>
+      // 为分享链接添加当前页面URL
+      $(function () {
+        // 遍历所有分享按钮
+        $(".share-box a").each(function () {
+          // 获取当前元素的href属性
+          var href = $(this).attr("href");
+          // 修改href属性，添加当前页面URL
+          $(this).attr("href", href + window.location.href);
+        });
+      });
+    </script>
+  </body>
+</html>

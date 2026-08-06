@@ -1,0 +1,204 @@
+<header>
+  <div
+    class="container flex aic jcsb pos-r py-3 py-lg-0"
+    style="z-index: 10">
+    <a
+      href="/"
+      class="logo flex aic jcc pos-r"
+      style="z-index: 10">
+      <img
+        src="/themes/simpleboot3/public/assets/images/logo.png"
+        alt="{$site_info.site_name|default=''}" />
+    </a>
+    <nav class="nav ml-md-4 mr-md-4 mr-xl-auto ml-xl-5 d-lg-block">
+      <ul class="nav-box w-full flex aic jcsb">
+        <!-- <navigation
+          nav-id=""
+          root=""
+          id="main-navigation"
+          max-level="0">
+          <navigationMenu>
+            <div class="nav-item nav-item-{$menu.id}">
+              <a
+                class="level-1"
+                href="{$menu.href|default=''}"
+                target="{$menu.target|default=''}"
+                nav-id="{$menu.id|default=''}"
+                parent-id="{$menu.parent_id}">
+                {$menu.name|default=''}
+              </a>
+            </div>
+          </navigationMenu>
+        </navigation> -->
+        <navigation
+          nav-id=""
+          root=""
+          id="main-navigation"
+          class="nav navbar-nav navbar-nav-custom"
+          max-level="0">
+          <navigationMenu>
+            <if condition="$level gt 1">
+              <li class="menu-item menu-item-level-{$level} levelgt1">
+                <if condition="$menu.href gt '##'">
+                  <a
+                    href="{$menu.href|default=''}"
+                    target="{$menu.target|default=''}">
+                    {$menu.name|default=''}
+                  </a>
+                  <else />
+                  <a
+                    href="{$menu.href|default=''}" >
+                    <span class="s-1">{$menu.name|default=''}</span>
+                    <span class="s-2">Coming Soon</span>
+                  </a>
+                </if>
+              </li>
+              <else />
+              <li class="menu-item menu-item-level-{$level}">
+                <a
+                  href="{$menu.href|default=''}"
+                  target="{$menu.target|default=''}">
+                  {$menu.name|default=''}
+                </a>
+              </li>
+            </if>
+          </navigationMenu>
+          <navigationFolder
+            root="li"
+            dropdown="ul"
+            dropdown-class="dropdown-menu-box">
+            <a
+              href="#"
+              data-toggle="dropdown">
+              {$menu.name|default=''}<span class="caret"></span>
+            </a>
+          </navigationFolder>
+        </navigation>
+      </ul>
+    </nav>
+    <div class="no-translate ml-auto ml-xl-5 language-box flex aic jcc px15 py10 text-14 text-white rounded pos-r">
+      <span id="language">English</span>
+      <i class="iconfont icon-outline-arrow-down-1 ml4 text-14"></i>
+      <ul class="language-list pos-a">
+        <li>
+          <a
+            language="english"
+            href="javascript:translate.changeLanguage('english');"
+            >English</a
+          >
+        </li>
+        <li>
+          <a
+            language="french"
+            href="javascript:translate.changeLanguage('french');"
+            >Français</a
+          >
+        </li>
+        <li>
+          <a
+            language="russian"
+            href="javascript:translate.changeLanguage('russian');"
+            >Русский</a
+          >
+        </li>
+        <li>
+          <a
+            language="chinese_simplified"
+            href="javascript:translate.changeLanguage('chinese_simplified');"
+            >简体中文</a
+          >
+        </li>
+        <li>
+          <a
+            language="chinese_traditional"
+            href="javascript:translate.changeLanguage('chinese_traditional');"
+            >繁體中文</a
+          >
+        </li>
+        <li>
+          <a
+            language="arabic"
+            href="javascript:translate.changeLanguage('arabic');"
+            >العربية</a
+          >
+        </li>
+        <li>
+          <a
+            language="japanese"
+            href="javascript:translate.changeLanguage('japanese');"
+            >日本語</a
+          >
+        </li>
+        <li>
+          <a
+            language="deutsch"
+            href="javascript:translate.changeLanguage('deutsch');"
+            >Deutsch</a
+          >
+        </li>
+        <li>
+          <a
+            language="portuguese"
+            href="javascript:translate.changeLanguage('portuguese');"
+            >Português</a
+          >
+        </li>
+        <li>
+          <a
+            language="italian"
+            href="javascript:translate.changeLanguage('italian');"
+            >Italiano</a
+          >
+        </li>
+        <li>
+          <a
+            language="korean"
+            href="javascript:translate.changeLanguage('korean');"
+            >한국어</a
+          >
+        </li>
+      </ul>
+    </div>
+    <div class="menu-box rounded ml-2 aic jcc d-flex d-lg-none">
+      <div class="menu"><span></span></div>
+    </div>
+  </div>
+</header>
+
+<script>
+  $(".language-list a").click(function () {
+    window.location.reload();
+  });
+  const to = localStorage.getItem("to");
+  const language = {
+    english: "English",
+    french: "Français",
+    russian: "Русский",
+    chinese_simplified: "中文",
+    chinese_traditional: "繁體中文",
+    arabic: "العربية",
+    japanese: "日本語",
+    deutsch: "Deutsch",
+    portuguese: "Português",
+    italian: "Italiano",
+    korean: "한국어",
+  };
+  $("#language").text(to ? language[to] || "English" : "English");
+  $(".menu-box").click(function (e) {
+    e.preventDefault();
+    $(this).find(".menu").toggleClass("active");
+    $("header").toggleClass("m-show-nav");
+  });
+
+  const currentPath = window.location.href;
+  const aTags = document.querySelectorAll(".nav-item a");
+  let href = "";
+  aTags.forEach((aTag) => {
+    // 获取a标签的href属性值，并进行处理，去除可能的多余空格等
+    href = aTag.getAttribute("href").trim();
+    // 对比当前页面路径和a标签的href（这里为了简单对比，只考虑末尾部分是否匹配，更严谨的可以考虑更多情况）
+    if (currentPath.endsWith(href) && href != "/" && href != "") {
+      aTag.classList.add("active");
+    }
+  });
+</script>

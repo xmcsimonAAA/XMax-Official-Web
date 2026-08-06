@@ -1,0 +1,8 @@
+{
+  "name": "导航条",
+  "action": "public/Nav",
+  "description": "导航条模板文件",
+  "is_public": "1",
+  "order": 1.0,
+  "more": {}
+}

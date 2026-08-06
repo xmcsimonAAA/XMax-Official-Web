@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{$page.post_title}</title>
+    <meta name="keywords" content="{$page.post_keywords}" />
+    <meta name="description" content="{$page.post_excerpt}" />
+    <link
+      rel="stylesheet"
+      href="__TMPL__/public/assets/swiper/swiper-bundle.min.css"
+    />
+    <include file="public@head" />
+    <hook name="before_head_end" />
+  </head>
+  <body class="page-page danye-page">
+    <include file="public@nav" />
+    <div class="box1 flex aic jcc pos-r">
+      <img
+        src="{:cmf_get_image_url($page.more.thumbnail)}"
+        class="d-block w-full"
+        alt=""
+      />
+      <div class="info pos-a text-center">
+        <h2>{$page.post_title}</h2>
+        <notempty name="page.post_excerpt">
+          <p>{$page.post_excerpt}</p>
+        </notempty> 
+      </div>
+    </div>
+    <div style="background-color: #d2e0f6">
+      <div class="content-box">
+        <div class="container text-black py-5">
+          <div>{$page.post_content|default=''}</div>
+          <notempty name="page.more.files">
+            <foreach name="page.more.files" item="file">
+              <div class="my-4">
+                <a
+                  href=" {:cmf_get_file_download_url($file.url)}"
+                  download="{$file.name}"
+                  title="{$file.name}"
+                  style="text-decoration: underline; color: var(--color)"
+                  >{$file.name}</a
+                >
+              </div>
+            </foreach>
+          </notempty>
+        </div>
+      </div>
+    </div>
+    <include file="public@footer" />
+    <include file="public@scripts" />
+    <hook name="before_body_end" />
+  </body>
+</html>

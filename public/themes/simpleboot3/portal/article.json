@@ -1,0 +1,23 @@
+{
+  "name": "文章页",
+  "action": "portal/Article/index",
+  "description": "文章页模板文件",
+  "order": 10.0,
+  "more": {
+    "widgets": {
+      "box1": {
+        "title": "第一屏",
+        "display": "1",
+        "vars": {
+          "image": {
+            "title": "背景图片",
+            "value": "",
+            "type": "image",
+            "placeholder": "请选择背景图片",
+            "tip": ""
+          }
+        }
+      }
+    }
+  }
+}

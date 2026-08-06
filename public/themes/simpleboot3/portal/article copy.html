@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{$article.post_title}</title>
+    <meta name="keywords" content="{$site_info.site_seo_keywords|default=''}" />
+    <meta
+      name="description"
+      content="{$site_info.site_seo_description|default=''}"
+    />
+    <include file="public@head" />
+  </head>
+  <body class="page-page article-page">
+    <include file="public@nav" />
+    <widget name="box1">
+      <div
+        class="box box1 flex aic jcc"
+        style="
+          background-image: url('{:cmf_get_image_url($widget.vars.image)}');
+          padding-top: calc(64px + 2rem);
+        "
+      >
+        <div class="info flex aic jcc">
+          <div class="container text-center">
+            <h2 class="fw-600">{$article.post_title}</h2>
+          </div>
+        </div>
+      </div>
+    </widget>
+    <div style="background-color: #d2e0f6">
+      <div class="content-box">
+        <div class="container text-black py-5">
+          <div class="h flex aic">
+            <div class="dian"></div>
+            <div class="by font-bold">{$article.user.user_nickname}</div>
+            <div class="d-flex ml-3 share">
+              <span>Share</span> <i class="iconfont icon-fenxiang ml-2"></i>
+              <div class="share-box">
+                <a
+                  href="https://facebook.com/sharer/sharer.php?u="
+                  class="facebook"
+                >
+                  <i class="iconfont icon-facebook"></i>
+                </a>
+                <a href="http://twitter.com/share?url=" class="twitter">
+                  <i class="iconfont icon-TwitterX"></i>
+                </a>
+                <a
+                  href="https://linkedin.com/shareArticle?url="
+                  class="linkedin"
+                >
+                  <i class="iconfont icon-linkedin"></i>
+                </a>
+                <!-- <a href="mailto:?body=" class="mailto">
+                  <i class="iconfont icon-youxiang1"></i>
+                </a> -->
+              </div>
+            </div>
+            <div class="date font-bold ml-auto">
+              <?php echo date('F j.Y',$article['published_time']); ?>
+            </div>
+          </div>
+          <if condition="!empty($article.more.video)">
+            <div class="flex aic jcc mt-5">
+              <video
+                controls
+                src="{:cmf_get_image_url($article.more.video)}"
+              ></video>
+            </div>
+          </if>
+          <button onclick="sendEmail()">发送邮件</button>
+          <if condition="!empty($article.post_content)">
+            <h4 class="mt-5 mb-4 font-bold" style="font-size: 24px">
+              HIGHLIGHTS
+            </h4>
+            <div class="content">{$article.post_content|raw}</div>
+            <div class="fujian">
+              <notempty name="article.more.files">
+                <foreach name="article.more.files" item="file">
+                  <div class="my-4">
+                    <a
+                      href=" {:cmf_get_file_download_url($file.url)}"
+                      download="{$file.name}"
+                      title="{$file.name}"
+                      style="text-decoration: underline; color: var(--color)"
+                      >{$file.name}</a
+                    >
+                  </div>
+                </foreach>
+              </notempty>
+            </div>
+          </if>
+        </div>
+        <div class="container tuijian">
+          <div class="ranking">
+            <php> $hot_articles=[]; </php>
+            <ul class="row news pb-5">
+              <portal:articles limit="3" order="post.recommended DESC">
+                <php>$top=$key<3?"top3":"";</php>
+                <div class="col-md-6 col-lg-4 mt-3 mt-lg-4 {$top}">
+                  <a
+                    href="{:cmf_url('portal/Article/index',array('id'=>$vo['id']))}"
+                    class="item rounded-xl d-flex flex-col overflow-hidden text-white h-full"
+                  >
+                    <div class="img-box">
+                      <div
+                        class="img w-full"
+                        style="
+                          background-image: url('{:cmf_get_image_url($vo.more.thumbnail)}');
+                        "
+                      ></div>
+                    </div>
+                    <div
+                      class="info p-3 flex-1 w-full d-flex flex-col bg-white text-black"
+                    >
+                      <div class="flex-1">
+                        <div class="flex aic jcsb">
+                          <span class="text-red-500">Viewpoint</span>
+                          <span
+                            ><?php echo date('F j.Y', $vo['published_time']); ?></span
+                          >
+                        </div>
+                        <h2 class="text-18 mt-3 mb-2 line-1">
+                          {$vo.post_title}
+                        </h2>
+                        <p class="mb-4 lh-1/6 line-1">{$vo.post_excerpt}</p>
+                      </div>
+                      <i
+                        class="iconfont icon-outline-arrow-right-3 text-28"
+                      ></i>
+                    </div>
+                  </a>
+                </div>
+              </portal:articles>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <include file="public@footer" />
+    <include file="public@scripts" />
+    <hook name="before_body_end" />
+    <script>
+      // 为分享链接添加当前页面URL
+      $(function () {
+        // 遍历所有分享按钮
+        $(".share-box a").each(function () {
+          // 获取当前元素的href属性
+          var href = $(this).attr("href");
+          // 修改href属性，添加当前页面URL
+          $(this).attr("href", href + window.location.href);
+        });
+      });
+
+      function sendEmail() {
+        // 创建表单数据对象
+        const formData = new FormData();
+
+        // 添加参数，注意URL中不要有反引号
+        formData.append("subject", "标题");
+        formData.append("content", `<p>{$article.post_content}</p>`);
+
+        // 发送请求
+        fetch("/api/portal/sendEmail", {
+          method: "POST",
+          body: formData,
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            console.log("Success:", data);
+            alert("邮件发送请求已提交");
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+            alert("邮件发送请求失败");
+          });
+      }
+    </script>
+  </body>
+</html>

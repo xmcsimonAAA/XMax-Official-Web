@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Home {$site_info.site_name|default=''}</title>
+    <meta name="keywords" content="{$site_info.site_seo_keywords|default=''}" />
+    <meta name="description" content="{$site_info.site_seo_description|default=''}">
+    <include file="public@head" />
+    <link rel="stylesheet" href="__TMPL__/public/assets/swiper/swiper-bundle.min.css">
+    <link rel="stylesheet" href="__TMPL__/public/assets/style/hover-min.css">
+    <link rel="stylesheet" href="__TMPL__/public/assets/style/animate.css">
+    <hook name="before_head_end" />
+</head>
+
+<body class="index-page">
+    <include file="public@nav" />
+    <widget name="box1">
+        <div class="banner pos-r">
+            <video autoplay muted loop src="{:cmf_get_image_url($widget.vars.video)}" class="d-none d-lg-block"></video>
+            <!---->
+            <img src="{:cmf_get_image_url($widget.vars.image)}" alt="" class="d-block d-lg-none">
+            <div class="pos-a info flex aic jcc">
+                <div class="container text-white">
+                    <div class="row">
+                        <div class="col-lg-8">
+                            <h2 class="fw-600 wow bounceInLeft">{$widget.vars.title}</h2>
+                            <p class="wow bounceInLeft" data-wow-delay="0.1s">{$widget.vars.des}</p>
+                            <div class="flex aic wow bounceInLeft" data-wow-delay="0.2s">
+                                <a class="cu-btn flex aic jcc px15 py10 rounded" href="{$widget.vars.link}">
+                                    <span>Learn More</span>
+                                    <i class="iconfont icon-outline-arrow-right-3 ml4"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </widget>
+    <widget name="box2">
+        <div class="box2 pos-r overflow-hidden">
+            <img src="{:cmf_get_image_url($widget.vars.image)}" class="d-block w-full"></img>
+            <div class="pos-a info flex aic jcc">
+                <div class="container text-white">
+                    <div class="row justify-content-end">
+                        <div class="col-lg-6">
+                            <h2 class="pt-5 fw-600 wow bounceInRight">{$widget.vars.title}</h2>
+                            <p class="mb-0 pb-5 wow bounceInRight">{$widget.vars.des}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </widget>
+    <widget name="box3">
+        <div class="box3 py-4 py-md-5 pos-r overflow-hidden">
+            <div class="container my-5 text-white text-center">
+                <div class="_T pt-4 pb-3 wow fadeInUp">{$widget.vars.title}</div>
+                <div class="row mt-3 mt-md-4 ">
+                    <foreach name="$widget.vars.list" item="vo">
+                        <php>
+                            $key = $key * 0.1;
+                        </php>
+                        <div class="col-md-6 col-lg-4 mt-5 wow fadeInUp" data-wow-delay="{$key}s">
+                            <div class="flex flex-col aic jcc item h-full">
+                                <img src="{:cmf_get_image_url($vo.icon)}" class="d-block w-full rounded-xl">
+                                <div class="p-3 rounded-xl info flex-1 mt-3">
+                                    <h2 class="mb-3 text-18 lh-1/5">{$vo.title}</h2>
+                                    <p class="text-15 o-8 lh-1/6">{$vo.des}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </foreach>
+                </div>
+            </div>
+        </div>
+    </widget>
+    <widget name="box4">
+        <div class="box4 pos-r pb-5 pb-lg-0 overflow-hidden">
+            <div class="text-white">
+                <div class="_T pt-4 pb-3 text-center wow fadeInUp">{$widget.vars.title}</div>
+                <div class="grid mt-3 mt-md-4 pt-lg-4">
+                    <foreach name="$widget.vars.list" item="vo">
+                        <php>
+                            $k = 'fadeInLeft';
+                            if($key % 2 == 0 && $key > 0) $k = 'fadeInRight';
+                        </php>
+                        <div class="item mt-4 mt-lg-0 pos-r wow {$k}">
+                            <img src="{:cmf_get_image_url($vo.icon)}" class="d-block w-full">
+                            <div class="info flex aifs jcc flex-col">
+                                <h2 class="mb-3 mb-lg-2 mb-xl-3 text-18 lh-1/5">{$vo.title}</h2>
+                                <p class="text-15 lh-1/6">{$vo.des}</p>
+                            </div>
+                        </div>
+                    </foreach>
+                </div>
+            </div>
+        </div>
+    </widget>
+    <widget name="box5">
+        <div class="box5 pos-r mt-5 mt-lg-0 overflow-hidden">
+            <img src="{:cmf_get_image_url($widget.vars.image)}" class="d-block w-full"></img>
+            <div class="pos-a info py-5 flex aic flex-col">
+                <div class="_T pt-0 pt-4 pt-md-5 text-center wow fadeInUp">{$widget.vars.title}</div>
+                <div class="container flex aic flex-1">
+                    <div class="w-full">
+                        <div class="row justify-content-end ">
+                            <div class="col-lg-6">
+                                <div class="con rounded-xl p-4 py-md-5 px-md-4">
+                                    <h2 class="fw-600 wow fadeInRight">{$widget.vars.sub_title}</h2>
+                                    <!-- <p class="mb-0 my-4">{$widget.vars.des_title}</p> -->
+                                    <ul>
+                                        <foreach name="$widget.vars.list" item="vo">
+                                            <li class="lh-1/6 mt-4 wow fadeInRight">
+                                                <span class="flex-1">{$vo.content}</span>
+                                            </li>
+                                        </foreach>
+                                    </ul>
+                                    <div class="flex aic mt-4 mt-md-5  wow fadeInRight" data-wow-delay="0.1s">
+                                        <a class="cu-btn flex aic jcc px15 py10 rounded" href="/page/7.html">
+                                            <span>Read More</span>
+                                            <i class="iconfont icon-outline-arrow-right-3 ml4"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </widget>
+
+    <widget name="box6">
+        <div class="box6 py-4 py-md-5 pos-r">
+            <div class="container my-5 text-white text-center">
+                <div class="_T pt-4 pb-3 wow fadeInUp">{$widget.vars.title}</div>
+                <p class="sub_t text-16 wow fadeInUp">{$widget.vars.sub_title}</p>
+                <div class="row mt-3 mt-md-4 ">
+                    <foreach name="$widget.vars.list" item="vo">
+                        <php>
+                            $key = $key * 0.1;
+                        </php>
+                        <div class="col-md-4 mt-4 wow fadeInUp" data-wow-delay="{$key}s">
+                            <div class="flex flex-col aic jcc item rounded-xl py-4 px-3 hover-bg h-full">
+                                <img src="{:cmf_get_image_url($vo.icon)}" class="d-block icon h-32">
+                                <h2 class="mt-3 mb-2 text-18 lh-1/5">{$vo.title}</h2>
+                                <p class="text-15 o-8 lh-1/6">{$vo.des}</p>
+                            </div>
+                        </div>
+                    </foreach>
+                </div>
+            </div>
+        </div>
+    </widget>
+
+    <widget name="box7">
+        <div class="box7 py-4 py-md-5 pos-r">
+            <div class="container my-5">
+                <div class="_T pt-4 pb-3 text-center wow fadeInUp">{$widget.vars.title}</div>
+                <div class="row mt-4">
+                    <div class="col-lg-8 mt-3 mt-lg-4">
+                        <div class="l rounded-xl">
+                            <div style="height: 500px;" class="echart-box bg-white rounded-xl wow fadeInUp" id="echart"></div>
+                            <div class="list flex">
+
+                                <!-- <div class="flex-1 flex flex-col aifs wow fadeInUp">
+                                    <p class="text-20">Number of Trades (24h)</p>
+                                    <p class="mt-3 text-36 c fw-600" id="previous_close">$0M</p>
+                                </div> -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 mt-3 mt-lg-4">
+                        <div class="ml-lg-5 r rounded-xl flex flex-col aifs jcsb h-full">
+                            <div class="flex flex-col aifs wow fadeInUp">
+                                <p class="text-20">Total Common Stock Shares</p>
+                                <p class="mt-3 text-36 c fw-600" id="totalShare">{$widget.vars.v1}</p>
+                            </div>
+                            <div class="flex flex-col aifs wow fadeInUp mt-3">
+                                <p class="text-20">{$widget.vars.t1}</p>
+                                <p class="mt-3 text-36 c fw-600" id="market_cap" style="opacity:0">{$widget.vars.v1}</p>
+                            </div>
+                            <div class="flex flex-col aifs wow fadeInUp mt-3">
+                                <p class="text-20">Date (UTC-5)</p>
+                                <p class="mt-3 text-36 c fw-600" id="date">-</p>
+                            </div>
+                            <div class="flex flex-col aifs wow fadeInUp mt-3">
+                                <p class="text-20">Current Price</p>
+                                <p class="mt-3 text-36 c fw-600" id="price">-</p>
+                            </div>
+                            <div class="flex flex-col aifs wow fadeInUp mt-3">
+                                <p class="text-20">Trading Volume (24h)</p>
+                                <p class="mt-3 text-36 c fw-600" id="volume">-</p>
+                            </div>
+                            <!-- <div class="flex flex-col aifs wow fadeInUp">
+                                <p class="text-20">{$widget.vars.t2}</p>
+                                <p class="mt-3 text-36 c fw-600">{$widget.vars.v2}</p>
+                            </div>
+                            <div class="flex flex-col aifs wow fadeInUp">
+                                <p class="text-20">{$widget.vars.t3}</p>
+                                <p class="mt-3 text-36 c fw-600">{$widget.vars.v3}</p>
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </widget>
+    <widget name="box8">
+        <div class="box8 pt-4 pb-3 pt-md-5 pb-md-3 pos-r">
+            <div class="container my-5">
+                <div class="_T pt-4 pb-3 text-center">{$widget.vars.title}</div>
+                <div class=" wow fadeInUp">
+                    <div class="swiper news mt-3 mt-lg-4">
+                        <div class="swiper-wrapper">
+                            <portal:articles limit="8" order="post.post_hits DESC"
+                                categoryIds="$widget.vars.article_category_id">
+                                <a href="{:cmf_url('portal/Article/index',array('id'=>$vo['id']))}"
+                                    class="swiper-slide rounded-xl overflow-hidden d-flex flex-col text-white">
+                                    <div class="img-box">
+                                        <div class="img"
+                                            style="background-image: url('{:cmf_get_image_url($vo.more.thumbnail)}');">
+                                        </div>
+                                    </div>
+                                    <div class="info p-3 flex-1 w-full d-flex flex-col">
+                                        <div class="flex aic">
+                                            <!--<span class="text-red-500">Viewpoint</span>-->
+                                            <span>
+                                                <?php echo date('F j.Y', $vo['published_time']); ?>
+                                            </span>
+                                        </div>
+                                        <div class="flex-1">
+                                            <h2 class="text-20 my-3 line-2">{$vo.post_title}</h2>
+                                            <p class="mb-4 lh-1/6 line-2">{$vo.post_excerpt}</p>
+                                        </div>
+                                        <i class="iconfont icon-outline-arrow-right-3 text-28"></i>
+                                    </div>
+                                </a>
+                            </portal:articles>
+                        </div>
+                        <div class="flex aic jcfe mt-3">
+                            <div class="swiper-button-prev"></div>
+                            <div class="swiper-button-next ml-4"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--<div class="videos mt-5 pos-r wow fadeInUp">-->
+                <!--    <div class="swiper">-->
+                <!--        <div class="swiper-wrapper">-->
+                <!--            <portal:articles limit="10" order="post.post_hits DESC"-->
+                <!--                categoryIds="$widget.vars.video_category_id">-->
+                <!--                <if condition="$vo.more.video != '' ">-->
+                <!--                    <div class="swiper-slide">-->
+                <!--                        <div class="row aic">-->
+                <!--                            <div class="col-lg-8 mt-5">-->
+                <!--                                <div class="pos-r" style="cursor: pointer;" onclick="playVideo(this)">-->
+                                                    <!-- <video class="d-block w-full rounded-xl video" src="{:cmf_get_image_url($vo.more.video)}"></video> -->
+                                                    <!-- <img data-video="{:cmf_get_image_url($vo.more.video)}" src="{:cmf_get_image_url($vo.more.thumbnail)}" alt="{$vo.post_title}"> -->
+                <!--                                    <div class="img"-->
+                <!--                                        style="background-image: url('{:cmf_get_image_url($vo.more.thumbnail)}');"-->
+                <!--                                        videosrc="{:cmf_get_image_url($vo.more.video)}"></div>-->
+                <!--                                    <div class="play-btn-box flex aic jcc">-->
+                <!--                                        <div class="play-btn flex aic jcc">-->
+                <!--                                            <i class="iconfont icon-kaiqi"></i>-->
+                <!--                                        </div>-->
+                <!--                                    </div>-->
+                <!--                                </div>-->
+                <!--                            </div>-->
+                <!--                            <div class="col-lg-4 mt-4 mt-md-5">-->
+                <!--                                <h2>{$vo.post_title}</h2>-->
+                <!--                                <p class="my-4">{$vo.post_excerpt}</p>-->
+                <!--                                <a href="{:cmf_url('portal/List/index',array('id'=>7))}"-->
+                <!--                                    class="d-inline-block px20 py15 rounded">More videos</a>-->
+                <!--                            </div>-->
+                <!--                        </div>-->
+                <!--                    </div>-->
+                <!--                </if>-->
+                <!--            </portal:articles>-->
+
+                <!--        </div>-->
+                <!--    </div>-->
+                <!--    <div class="swiper-button-next"></div>-->
+                <!--    <div class="swiper-button-prev"></div>-->
+                <!--</div>-->
+            </div>
+        </div>
+    </widget>
+    <widget name="box9">
+        <div class="box9 text-center py-5" style="background-image: url('{:cmf_get_image_url($widget.vars.image)}');">
+            <div class="container">
+                <h3 class="wow fadeInUp">{$widget.vars.title}</h3>
+                <div class="my-4 wow fadeInUp">
+                    <a href="{$widget.vars.link}"
+                        class="d-inline-block px20 py15 rounded text-white ">{$widget.vars.linktext}</a>
+                </div>
+                <p class="wow fadeInUp">{$widget.vars.sub_title}</p>
+            </div>
+        </div>
+    </widget>
+
+    <!-- 视频播放弹窗 -->
+    <div class="pos-f popup-video">
+        <div class="guan pos-a"><i class="iconfont icon-guanbi"></i></div>
+        <div class="video-box">
+            <!-- <video class="d-block w-full rounded-xl" controls autoplay src=""></video> -->
+            <iframe src="" frameborder="0"></iframe>
+        </div>
+    </div>
+    <include file="public@footer" />
+    </div>
+    <include file="public@scripts" />
+    <script src="__TMPL__/public/assets/swiper/swiper-bundle.min.js"></script>
+    <script src="__TMPL__/public/assets/js/index.js"></script>
+    <script>
+        const newsSwiper = new Swiper(".news", {
+            slidesPerView: 1,
+            spaceBetween: 15,
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+            },
+            breakpoints: {
+                640: {
+                    slidesPerView: 1,
+                    spaceBetween: 30,
+                },
+                768: {
+                    slidesPerView: 1.5,
+                    spaceBetween: 30,
+                },
+                1024: {
+                    slidesPerView: 2.5,
+                    spaceBetween: 30,
+                },
+                1366: {
+                    slidesPerView: 3,
+                    spaceBetween: 30,
+                },
+            },
+        });
+        const videoSwiper = new Swiper(".videos .swiper", {
+            loop: false,
+            navigation: {
+                nextEl: ".videos .swiper-button-next",
+                prevEl: ".videos .swiper-button-prev",
+            },
+        });
+
+
+        const playVideo = (el) => {
+            const videosrc = $(el).find('.img').attr('videosrc');
+            console.log(videosrc);
+            $('.popup-video .video-box').html(`<iframe src="${videosrc}" frameborder="0"></iframe>`);
+            $('.popup-video').addClass('show');
+        }
+
+        $('.popup-video .guan').on('click', () => {
+            $('.popup-video').removeClass('show');
+            $('.popup-video .video-box iframe').remove()
+        })
+    </script>
+    <script src="__TMPL__/public/assets/js/wow.min.js"></script>
+    <script>
+        new WOW().init();
+
+        var $W = $(window).width()
+        $(window).scroll(function () {
+            if ($W > 992 && $(window).scrollTop() > 0) {
+                $('nav').addClass('fixed')
+            } else {
+                $('nav').removeClass('fixed')
+            }
+        })
+
+        $('.nav li.go a').click(function (event) {
+            event.preventDefault()
+            const $id = $(this).attr('href')
+            const $o = $($id)
+            const $scrollTop = $o.offset().top
+            $(this).addClass('active')
+            $('html,body').animate({
+                scrollTop: $scrollTop
+            }, 500)
+
+            if ($W <= 1024) {
+                $('.menu').removeClass('close')
+                $('.nav').css('left', '-120%')
+            }
+        })
+ const num = $('#totalShare').text()
+        const formatter = new Intl.NumberFormat('en-US');
+        $('#totalShare').text(formatter.format(num))
+    </script>
+    <hook name="before_body_end" />
+</body>
+
+</html>

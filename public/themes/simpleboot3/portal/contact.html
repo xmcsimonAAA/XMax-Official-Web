@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{$page.post_title}</title>
+    <meta name="keywords" content="{$page.post_keywords}" />
+    <meta name="description" content="{$page.post_excerpt}" />
+    <include file="public@head" />
+    <hook name="before_head_end" />
+  </head>
+  <body class="page-page contact-page">
+    <include file="public@nav" />
+    <widget name="box1">
+      <div
+        class="box box1 flex aic jcc"
+        style="
+          background-image: url('{:cmf_get_image_url($widget.vars.image)}');
+          padding-top: calc(64px + 2rem);
+        "
+      >
+        <div class="info flex aic jcc">
+          <div class="container text-white">
+            <h2 class="fw-600">{$widget.vars.title}</h2>
+            <div class="row"><p class="col-lg-6 mb-0">{$widget.vars.sub_title}</p></div>
+            <div class="row"><p class="col-lg-8">{$widget.vars.des}</p></div>
+            <div class="row">
+                <div class="col-lg-8 form">
+                    <form id="contactForm" enctype="multipart/form-data" method="post" >
+                        <div class="row">
+                          <div class="col-md-6 mt-4 flex flex-col">
+                            <label>Name*</label>
+                            <input
+                              class="form-control bitian"
+                              name="name"
+                              id="name"
+                              required
+                              type="text"
+                            />
+                          </div>
+                          <div class="col-md-6 mt-4 flex flex-col">
+                            <label>
+                                Email*</label>
+                            <input
+                              class="form-control bitian"
+                              name="email"
+                              id="email"
+                              required
+                              type="text"
+                            />
+                          </div>
+                          <div class="col-md-6 mt-4 flex flex-col is-select" >
+                            <label>Country</label>
+                              <div class="input-box pos-r">
+                                <input
+                                class="form-control bitian"
+                                name="country"
+                                id="country" 
+                                type="text"
+                              />
+                              <div class="select pos-a"><i class="iconfont icon-xiasanjiaojiantou"></i></div>
+                              <ul class="opthions pos-a" type="Country"></ul>
+                            </div>
+                          </div>
+                          <div class="col-md-6 mt-4 flex flex-col is-select" >
+                            <label>Subject</label>
+                            <div class="input-box pos-r"> 
+                                <input
+                                class="form-control bitian"
+                                name="subject"
+                                id="subject"
+                                type="text"
+                                />
+                                <div class="select pos-a"><i class="iconfont icon-xiasanjiaojiantou"></i></div>
+                                <ul class="opthions pos-a" type="Subject"></ul>
+                            </div>
+                          </div>
+                          <div class="col-12 mt-4 flex flex-col">
+                            <label>Collaboration Details：</label>
+                            <textarea
+                              class="form-control bitian"
+                              name="message"
+                              id="message" 
+                              placeholder="Please briefly describe your cooperation needs (e.g., business scale, expected timeline, special requirements, etc.)500 words or less"
+                            ></textarea>
+                          </div>
+                          <!-- <div class="col-md-6 mt-4 flex flex-col">
+                            <label>Message*</label>
+                            <input
+                              class="form-control bitian"
+                              name="message"
+                              id="message"
+                              required
+                              type="text"
+                            />
+                          </div>
+                          <div class="col-md-6 mt-4 flex flex-col">
+                            <label>captcha</label>
+                            <input
+                              class="form-control bitian"
+                              name="captcha"
+                              id="captcha"
+                              type="text"
+                            />
+                          </div> 
+                          
+                          <div class="col-md-6 mt-4 flex flex-col is-select" >
+                            <label>Investment amount range</label>
+                            <div class="input-box pos-r"> 
+                                 <input
+                                    class="form-control bitian"
+                                    name="range"
+                                    id="range"
+                                    type="text"
+                                    />
+                                <div class="select pos-a"><i class="iconfont icon-xiasanjiaojiantou"></i></div>
+                                <ul class="opthions pos-a" type="Range"></ul>
+                            </div>
+                          </div> 
+                          <div class="col-md-6 mt-4 flex flex-col is-select" >
+                            <label>Asset of interest</label>
+                            <div class="input-box pos-r"> 
+                                <input
+                                class="form-control bitian"
+                                name="interest"
+                                id="interest"
+                                type="text"
+                                multiple
+                                />
+                                <div class="select pos-a"><i class="iconfont icon-xiasanjiaojiantou"></i></div>
+                                <ul class="opthions pos-a" type="Interest"></ul>
+                            </div>
+                          </div>  -->
+                          <div class="col-md-12">
+                            <div class="flex aic jcfe w-full mt-4">
+                                <input class="cu-btn btn-default" name="submit" type="submit" value="Submit">&nbsp;</form>
+                              </div>
+                          </div>
+                        </div>
+                      </form>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </widget>
+    <widget name="box2">
+      <div class="box2">
+        <div class="container my-5">
+          <div class="_T pt-4 pb-3 text-white text-center">
+            {$widget.vars.title}
+          </div>
+          <div class="row aic">
+            <div class="col-md-6">
+                <img src="{:cmf_get_image_url($widget.vars.image)}" class="w-full d-block" alt="">
+            </div>
+            <div class="col-md-6 lh-1/6">
+                {$widget.vars.des}
+            </div>
+          </div>
+        </div>
+      </div> 
+    </widget>
+    <widget name="box3">
+      <div class="box3">
+        <div class="container my-5">
+          <div class="_T pt-4 pb-3 text-center">
+            {$widget.vars.title}
+          </div>
+          <div class="row aic mt-5"> 
+            <div class="col-12 lh-1/6" style="white-space: pre-line;">{$widget.vars.des}</div>
+          </div>
+          
+          <div class="_T pt-5 pb-3">
+            Social media and instant messaging
+          </div>
+          <div class="flex aic mt-4" style="gap: 1.5rem;"> 
+              <foreach name="$theme_vars['app']" item="vo">
+                <a href="{$vo.link}" target="_blank">
+                  <img
+                    src="{:cmf_get_image_url($vo.logo)}"
+                    class="d-block h-32"
+                    alt="{$vo.name}"
+                  />
+                </a>
+              </foreach>
+          </div>
+        </div>
+      </div> 
+    </widget>
+    <div class="mask"></div>
+    <include file="public@footer" />
+    <include file="public@scripts" />
+    <hook name="before_body_end" />
+    <script>
+          // 获取表单元素
+    const contactForm = document.getElementById('contactForm');
+
+    if (contactForm) {
+        // 监听表单提交事件
+        contactForm.addEventListener('submit', function(event) {
+            // 阻止默认跳转行为
+            event.preventDefault();
+            // 创建 FormData 对象
+            const formData = new FormData(contactForm);
+
+            // 发起请求
+            fetch('/api/portal/contact', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('网络响应异常');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('接口响应:', data);
+                // 可以在这里添加处理成功响应的逻辑，例如显示提示信息、跳转页面等
+                if (data.code === 1) {
+                    alert('Submission successful');
+                    // 可以添加跳转页面的逻辑
+                    window.location.href = '/';
+                } else {
+                    alert('Submission failed: ' + data.msg);
+                }
+            })
+            .catch(error => {
+                console.error('请求出错:', error);
+                alert('Request error, please try again later');
+            });
+        });
+    }
+    </script>
+  </body>
+</html>

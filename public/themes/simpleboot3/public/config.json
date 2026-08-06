@@ -1,0 +1,41 @@
+{
+  "name": "模板全局配置",
+  "action": "public/Config",
+  "description": "模板全局配置文件",
+  "is_public": "1",
+  "order": 0.0,
+  "more": {
+    "vars": {
+      "app": {
+        "title": "第三方应用连接",
+        "type": "array",
+        "item": {
+          "logo": {
+            "title": "图标",
+            "value": "",
+            "type": "image",
+            "placeholder": "请选择图标"
+          },
+          "name": {
+            "title": "名称",
+            "value": "",
+            "type": "text",
+            "placeholder": "请选择名称"
+          },
+          "link": {
+            "title": "链接",
+            "value": "",
+            "type": "text",
+            "placeholder": "请输入链接"
+          }
+        }
+      },
+      "footerVideo": {
+        "title": "底部背景视频",
+        "value": "",
+        "type": "file",
+        "placeholder": "请选择视频"
+      }
+    }
+  }
+}

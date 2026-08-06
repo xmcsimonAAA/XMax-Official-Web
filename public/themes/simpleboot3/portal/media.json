@@ -1,0 +1,205 @@
+{
+  "name": "Media Center",
+  "action": "portal/Page/index",
+  "description": "Media Center模板文件",
+  "order": 10.0,
+  "more": {
+    "widgets": {
+      "box1": {
+        "title": "第一屏",
+        "display": "1",
+        "vars": {
+          "image": {
+            "title": "背景图片",
+            "value": "",
+            "type": "image",
+            "placeholder": "请选择背景图片",
+            "tip": ""
+          },
+          "title": {
+            "title": "标题",
+            "value": "Media Center",
+            "type": "text",
+            "placeholder": "请输入标题",
+            "tip": "",
+            "rule": {
+              "require": true
+            }
+          },
+          "des": {
+            "title": "简介",
+            "value": "As a publicly listed gateway to the future, XMAX is redefining the intersection of capital and breakthrough innovation. We don't just invest in companies—we invest in humanity's next evolution. From interplanetary expansion to the cognitive revolution and artificial intelligence, our portfolio represents the boldest bets on the trajectory of civilization. Together with visionary leaders like Elon Musk, we are building the infrastructure for humanity's future.",
+            "type": "textarea",
+            "placeholder": "请输入简介",
+            "tip": "",
+            "rule": {
+              "require": true
+            }
+          }
+        }
+      },
+      "box2": {
+        "title": "第二屏",
+        "display": "1",
+        "vars": {
+          "title": {
+            "title": "标题",
+            "value": "Network of Partner Institutions",
+            "type": "text",
+            "placeholder": "请输入标题",
+            "tip": "",
+            "rule": {
+              "require": true
+            }
+          },
+          "des": {
+            "title": "简介",
+            "value": "We collaborate with the world's most reputable legal and financial institutions to safeguard the security and lawful ownership of our investors' assets.",
+            "type": "textarea",
+            "placeholder": "请输入简介",
+            "tip": "",
+            "rule": {
+              "require": true
+            }
+          },
+          "article_category_id": {
+            "title": "文章分类ID",
+            "value": "",
+            "type": "text",
+            "dataSource": {
+              "api": "portal/Category/index",
+              "multi": true
+            },
+            "placeholder": "请选择分类",
+            "tip": "",
+            "rule": {
+              "require": true
+            }
+          }
+        }
+      },
+
+      "box3": {
+        "title": "第三屏",
+        "display": "1",
+        "vars": {
+          "title": {
+            "title": "标题",
+            "value": "Media Resources Download",
+            "type": "text",
+            "placeholder": "请输入标题",
+            "tip": "",
+            "rule": {
+              "require": true
+            }
+          },
+          "png_b": {
+            "title": "黑白PNG",
+            "value": "",
+            "type": "image",
+            "placeholder": "请选择图片"
+          },
+          "png_c": {
+            "title": "彩色PNG",
+            "value": "",
+            "type": "image",
+            "placeholder": "请选择图片"
+          }
+        }
+      },
+      "box4": {
+        "title": "第四屏",
+        "display": "1",
+        "vars": {
+          "image": {
+            "title": "背景图片",
+            "value": "",
+            "type": "image",
+            "placeholder": "请选择背景图片",
+            "tip": ""
+          },
+          "title": {
+            "title": "标题",
+            "value": "Media Partnership Channels",
+            "type": "text",
+            "placeholder": "请输入标题",
+            "tip": "",
+            "rule": {
+              "require": true
+            }
+          },
+          "sub_title": {
+            "title": "副标题",
+            "value": "Areas of Collaboration Include:",
+            "type": "textarea",
+            "placeholder": "请输入副标题"
+          },
+          "des": {
+            "title": "介绍",
+            "value": "·Joint feature reporting ·In-depth content partnerships across industry value chains ·Co-produced podcast or video documentary series ·Sponsorships or co-hosted media events",
+            "type": "textarea",
+            "placeholder": "请输入介绍"
+          }
+        }
+      },
+      "box5": {
+        "title": "第五屏",
+        "display": "1",
+        "vars": {
+          "title": {
+            "title": "标题",
+            "value": "Collaboration Application Form",
+            "type": "text",
+            "placeholder": "请输入标题",
+            "tip": "",
+            "rule": {
+              "require": true
+            }
+          },
+          "sub_title": {
+            "title": "副标题",
+            "value": "\"Thank you for choosing to collaborate with Xmax! Please fill out the form below, and our team will contact you within 48 hours.\"",
+            "type": "textarea",
+            "placeholder": "请输入副标题"
+          }
+        }
+      },
+      "box6": {
+        "title": "第六屏",
+        "display": "1",
+        "vars": {
+          "image": {
+            "title": "背景图片",
+            "value": "",
+            "type": "image",
+            "placeholder": "请选择背景图片",
+            "tip": ""
+          },
+          "title": {
+            "title": "标题",
+            "value": "Media Contact",
+            "type": "text",
+            "placeholder": "请输入标题",
+            "tip": "",
+            "rule": {
+              "require": true
+            }
+          },
+
+          "sub_title": {
+            "title": "副标题",
+            "value": "Media Contact Email:",
+            "type": "textarea",
+            "placeholder": "请输入副标题"
+          },
+          "des": {
+            "title": "介绍",
+            "value": "Email: press@xmax.global Social Media X: @XmaxGlobal YouTube: @XmaxGlobal For interviews with Xmax management, official comments, or press release requests, please contact us through the channels above.",
+            "type": "textarea",
+            "placeholder": "请输入介绍"
+          }
+        }
+      }
+    }
+  }
+}

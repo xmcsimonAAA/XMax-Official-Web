@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{$page.post_title}</title>
+    <meta name="keywords" content="{$page.post_keywords}" />
+    <meta name="description" content="{$page.post_excerpt}" />
+    <include file="public@head" />
+    <hook name="before_head_end" />
+  </head>
+  <body class="page-page investor-page">
+    <include file="public@nav" />
+    <widget name="box1">
+      <div
+        class="box flex aic jcc"
+        style="
+          background-image: url('{:cmf_get_image_url($widget.vars.image)}');
+          padding-top: calc(64px + 2rem);
+        "
+      >
+        <div class="info flex aic jcc">
+          <div class="container text-white">
+            <h2 class="fw-600">{$widget.vars.title}</h2>
+            <div class="row"><p class="col-md-6">{$widget.vars.des}</p></div>
+          </div>
+        </div>
+      </div>
+    </widget>
+    <widget name="box2">
+      <div class="box2">
+        <div class="container my-5">
+          <div class="_T pt-4 pb-3 text-white text-center">
+            {$widget.vars.title}
+          </div>
+          <p class="text-center">{$widget.vars.des}</p>
+          <div class="d-flex aic jcc tabs-round mt-5">
+            <foreach name="$widget.vars.list" item="vo">
+              <div class="tab flex-1 flex flex-col aic jcc hover-large">
+                <div class="name">{$vo.companies}</div>
+                <span class="tag">{$vo.tag}</span>
+              </div>
+            </foreach>
+          </div>
+        </div>
+        <div class="con-box">
+          <div class="container py-5">
+            <foreach name="$widget.vars.list" item="vo">
+              <div class="con rounded-xl">
+                <div class="row aic">
+                  <div class="col-md-5 col-xl-3">
+                    <img
+                      src="{:cmf_get_image_url($vo.logo)}"
+                      alt="{$vo.companies}"
+                      class="rounded-xl w-full d-block"
+                    />
+                  </div>
+                  <div class="col-md-7 col-xl-9 lh-1/6 text-16 mt-4 mt-md-0">{$vo.content}</div>
+                </div>
+              </div>
+            </foreach>
+          </div>
+        </div>
+      </div>
+    </widget>
+    <widget name="box3">
+      <div
+        class="box flex aic jcc"
+        style="background-image: url('{:cmf_get_image_url($widget.vars.image)}')">
+        <div class="info flex aic">
+          <div class="container text-white">
+            <h3 class="fw-600">{$widget.vars.title}</h3>
+            <div class="row mt-4">
+              <div class="row col-md-11">
+                <foreach
+                  name="$widget.vars.list"
+                  item="vo">
+                  <p
+                    class="col-md-6 my-3"
+                    style="white-space: unset">
+                    <a
+                      target="_blank"
+                      href="{:cmf_get_image_url($vo.file)}"
+                      class="text-white"
+                      >{$vo.name}</a
+                    >
+                  </p>
+                </foreach>
+              </div>
+            </div>
+            <h3 class="mt-5">SEC FILINGS</h3>
+            <div class="row mt-4">
+              <div class="col-md-6">
+                <div class="row">
+                  <!-- 获取二级分类 -->
+                  <portal:subCategories
+                    categoryId="3"
+                    item="ca">
+                    <p
+                      class="col-sm-6 col-md-3 col-lg-2 my-3"
+                      style="white-space: unset">
+                      <a
+                        href="{:cmf_url('portal/List/index',array('id'=>$ca.id))}"
+                        class="text-white"
+                        >{$ca.name}</a
+                      >
+                    </p>
+                  </portal:subCategories>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </widget>
+    <include file="public@footer" />
+    <include file="public@scripts" />
+    <hook name="before_body_end" />
+    <script>
+      $(function () {
+        $(".tabs-round .tab").eq(0).addClass("active");
+        $(".con").eq(0).addClass("show");
+
+        $(".tabs-round .tab").mouseenter(function () {
+          $(this).addClass("active").siblings().removeClass("active");
+          $(".con")
+            .eq($(this).index())
+            .addClass("show")
+            .siblings()
+            .removeClass("show");
+        });
+      });
+    </script>
+  </body>
+</html>

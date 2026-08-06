@@ -1,0 +1,96 @@
+{
+  "name": "Contact",
+  "action": "portal/Page/index",
+  "description": "Contact模板文件",
+  "order": 10.0,
+  "more": {
+    "widgets": {
+      "box1": {
+        "title": "第一屏",
+        "display": "1",
+        "vars": {
+          "image": {
+            "title": "背景图片",
+            "value": "",
+            "type": "image",
+            "placeholder": "请选择背景图片",
+            "tip": ""
+          },
+          "title": {
+            "title": "标题",
+            "value": "Contact Us",
+            "type": "text",
+            "placeholder": "请输入标题",
+            "tip": "",
+            "rule": {
+              "require": true
+            }
+          },
+          "sub_title": {
+            "title": "副标题",
+            "value": "We welcome inquiries and collaborations from around the world. Whether you're an investor, media outlet, partner, or legal advisor, we will respond to your inquiries professionally and efficiently.",
+            "type": "textarea",
+            "placeholder": "请输入副标题"
+          },
+          "des": {
+            "title": "说明",
+            "value": "For inquiries regarding investment, marketing, recruitment, media, etc., please submit the following contact information. Common fields (applicable to all types)",
+            "type": "textarea",
+            "placeholder": "请输入说明"
+          }
+        }
+      },
+      "box2": {
+        "title": "第二屏",
+        "display": "1",
+        "vars": {
+          "title": {
+            "title": "标题",
+            "value": "Contact Us",
+            "type": "text",
+            "placeholder": "请输入标题",
+            "tip": "",
+            "rule": {
+              "require": true
+            }
+          },
+          "image": {
+            "title": "缩略图",
+            "value": "",
+            "type": "image",
+            "placeholder": "请选择缩略图",
+            "tip": ""
+          },
+          "des": {
+            "title": "内容",
+            "value": "Company Headquarters Xmax Inc. Nasdaq listed company code：XMAX Address：One World Trade Center, 85th Floor, New York, NY 10007, USA Email：hello@xmax.global Phone：+1 (646) XXX-XXXX English: Xmax Inc. NASDAQ: XMAX Address: One World Trade Center, 85th Floor, New York, NY 10007, USA Email: hello@xmax.global Phone: +1 (646) XXX-XXXX",
+            "type": "textarea",
+            "placeholder": "请输入内容"
+          }
+        }
+      },
+      "box3": {
+        "title": "第三屏",
+        "display": "1",
+        "vars": {
+          "title": {
+            "title": "标题",
+            "value": "International Office",
+            "type": "text",
+            "placeholder": "请输入标题",
+            "tip": "",
+            "rule": {
+              "require": true
+            }
+          },
+          "des": {
+            "title": "内容",
+            "value": "🇸🇬 Singapore Address: Marina Bay Financial Centre Tower 1, Singapore 018981 🇭🇰 Hong Kong Address: Central Plaza, 18 Harbour Road, Wan Chai, Hong Kong 🇨🇳 Beijing, China Address: Building A, Jianwai SOHO, Chaoyang District, Beijing (Administrative office only, no investor visits)",
+            "type": "textarea",
+            "placeholder": "请输入内容"
+          } 
+        }
+      }
+    }
+  }
+}

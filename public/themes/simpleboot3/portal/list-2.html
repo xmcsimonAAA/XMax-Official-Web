@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{$category.name} {$category.seo_title} {$site_info.site_name|default=''}</title>
+    <meta
+      name="keywords"
+      content="{$category.seo_keywords},{$site_info.site_seo_keywords|default=''}" />
+    <meta
+      name="description"
+      content="{$category.seo_description},{$site_info.site_seo_description|default=''}" />
+    <include file="public@head" />
+    <hook name="before_head_end" />
+  </head>
+  <body class="page-page media-page news-list-page">
+    <include file="public@nav" />
+    <div
+      class="box flex aic jcc"
+      style="
+        background-image: url('/upload/default/20250827/85373fa6a321fd3d51e1f51f58be0456.jpg');
+        padding-top: calc(64px + 2rem);
+        height: calc(64px + 2rem);
+        min-height: unset;
+      "></div>
+    <div class="container my-5">
+      <!-- <p>SEC FILINGS {$category.name}</p> -->
+      <div class="_T pt-4 pb-3 text-white text-center">SEC FILINGS {$category.name}</div>
+      <!-- <div class="tabs d-flex aic jcc mt-4 mb-4">
+        <portal:subCategories categoryId="3" item="vo">
+          <if condition="$vo.id==$category.id">
+            <a
+              class="active rounded"
+              href="{:cmf_url('portal/List/index',array('id'=>$vo.id))}"
+              >{$vo.name}</a
+            >
+            <else />
+            <a class="rounded" href="{:cmf_url('portal/List/index',array('id'=>$vo.id))}"
+              >{$vo.name}</a
+            >
+          </if>
+        </portal:subCategories>
+      </div> -->
+      <div class="w-75 mx-auto mt-5">
+        <php>
+          $where= function($query){ $query->where('post.create_time','>=',0); }; $page=[ 'list_rows'=>12,
+          'next'=>'下一页', 'prev'=>'上一页' ];
+        </php>
+
+        <portal:articles
+          item="vo"
+          where="$where"
+          order="post.published_time DESC"
+          page="$page"
+          relation="categories"
+          categoryIds="$category.id"
+          returnVarName="articles_data">
+          <div class="mt-4">
+            <div class="flex">
+              <a
+                href="{$vo.post_source}"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="d-flex aic overflow-hidden text-white h-full">
+                <span
+                  style="height: 6px; width: 6px; background-color: #fff"
+                  class="rounded-xl mr-3"></span>
+                <h2 class="text-18 mr-4 flex-1">{$vo.post_title}</h2>
+                <span class="text-18"><?php echo date('Y-m-d', $vo['published_time']); ?></span>
+              </a>
+            </div>
+          </div>
+        </portal:articles>
+      </div>
+      <div class="flex aic jcc mt-4">
+        <ul class="pagination">
+          <page />
+        </ul>
+      </div>
+    </div>
+    <include file="public@footer" />
+    <include file="public@scripts" />
+    <hook name="before_body_end" />
+  </body>
+</html>

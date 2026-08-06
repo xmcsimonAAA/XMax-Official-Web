@@ -1,0 +1,135 @@
+body {
+  background-color: #f5f5f5;
+}
+.tabbable #container{
+    border: 0;
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 1px 0;
+}
+.table-bordered {
+  border: 0;
+  background-color: #fff;
+  border-radius: 5px;
+}
+.table > thead > tr > th {
+  border: 0;
+}
+.table-bordered > thead > tr > th,
+.table-bordered > tbody > tr > th,
+.table-bordered > tfoot > tr > th,
+.table-bordered > thead > tr > td,
+.table-bordered > tbody > tr > td,
+.table-bordered > tfoot > tr > td {
+  border: 0;
+  border-bottom: 1px solid #f2f2f2;
+  padding: 15px 20px;
+  width: auto;
+}
+.table-hover>tbody>tr:hover{
+    background-color: #f8f8f8;
+}
+tfoot {
+  border-top: 1px solid #f2f2f2;
+}
+.nav.nav-tabs {
+  background-color: #fff;
+  border-radius: 5px;
+  overflow: hidden;
+}
+.nav-tabs {
+  border: 0;
+}
+.nav-tabs > li.active > a,
+.nav-tabs > li.active > a:hover,
+.nav-tabs > li.active > a:focus {
+  border: 0;
+  background: none;
+}
+.nav-tabs > li > a {
+  padding: 15px 20px;
+  color: #999;
+  border-radius: 0;
+  border: 0;
+  margin: 0;
+}
+.nav-tabs > li.active > a {
+  color: #006fc4 !important;
+  font-weight: 600;
+}
+.margin-top-20 {
+  margin-top: 15px !important;
+}
+.sidebar {
+  border: 0;
+  background-color: #fff;
+}
+tr:last-child td {
+  border-bottom: 0 !important;
+}
+.btn {
+  padding: 4px 8px;
+  border-radius: 5px;
+}
+
+input.btn,
+input.btn + a.btn {
+  padding: 6px 10px;
+  border-radius: 5px;
+}
+ 
+form.form-horizontal {
+  padding: 25px 0;
+  background-color: #fff;
+  border-radius: 5px;
+}
+
+form.well.form-inline {
+  background-color: #fff;
+  border-radius: 5px;
+  border: 0;
+  padding: 20px;
+}
+
+.form-control {
+  border: 1px solid #f2f2f2;
+  border-radius: 5px;
+  box-shadow: none;
+}
+.control-label {
+  font-weight: 400;
+}
+.nav-list > li > a > [class*="fa-"]:first-child {
+  display: none !important;
+}
+.nav-list > li > a {
+  padding: 0 16px !important;
+}
+.sidebar-shortcuts{
+  height: auto!important;
+  max-height: unset!important;
+  padding: 10px 5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background-color: #fff;
+  border-bottom: 4px solid #f2f2f2;
+}
+ 
+.wrap.js-check-wrap .row.margin-top-20{
+    margin: 0;
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 20px 5px;
+}
+th{
+    white-space: nowrap;
+}
+#filesetting-page form{
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 10px;
+}
+.aui_state_noTitle .aui_inner{
+  border-color: #ddd!important;
+} 

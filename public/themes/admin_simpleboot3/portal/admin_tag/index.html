@@ -1,0 +1,68 @@
+<include file="public@header"/>
+</head>
+<body>
+<div class="wrap">
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="{:url('AdminTag/index')}">标签管理</a></li>
+        <li><a href="{:url('AdminTag/add')}">添加标签</a></li>
+    </ul>
+    <form class="well form-inline margin-top-20" method="post" action="{:url('AdminTag/index')}">
+        名称:
+        <input type="text" class="form-control" name="keyword" style="width: 200px;"
+               value="{$keyword|default=''}" placeholder="请输入关键字">
+        <button class="btn btn-primary">搜索</button>
+    </form>
+    <form method="post" class="js-ajax-form margin-top-20">
+        <div class="table-actions">
+            <!--<button type="submit" class="btn btn-primary btn-sm js-ajax-submit">{:lang('SORT')}</button>-->
+        </div>
+        <table class="table table-hover table-bordered table-list">
+            <thead>
+            <tr>
+                <th>名称</th>
+                <th>状态</th>
+                <th width="160">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <foreach name="tags" item="vo">
+                <tr>
+                    <td title="ID:{$vo.id}">{$vo.name}</td>
+                    <td>
+                        <eq name="vo.status" value="1">
+                            <span class="label label-success">{$arrStatus[$vo['status']]}</span>
+                            <else/>
+                            <span class="label label-warning">{$arrStatus[$vo['status']]}</span>
+                        </eq>
+                    </td>
+                    <td>
+                        <eq name="vo.status" value="1">
+                            <a class="btn btn-xs btn-warning js-ajax-dialog-btn"
+                               href="{:url('AdminTag/upStatus',['id'=>$vo['id'],'status'=>0])}">禁用</a>
+                            <else/>
+                            <a class="btn btn-xs btn-success js-ajax-dialog-btn"
+                               href="{:url('AdminTag/upStatus',['id'=>$vo['id'] ,'status'=>1])}">启用</a>
+                        </eq>
+                        <a class="btn btn-xs btn-danger js-ajax-delete"
+                           href="{:url('AdminTag/delete',['id'=>$vo['id']])}">删除</a>
+                    </td>
+                </tr>
+            </foreach>
+            </tbody>
+            <tfoot>
+            <tr>
+                <th>名称</th>
+                <th>状态</th>
+                <th width="160">操作</th>
+            </tr>
+            </tfoot>
+        </table>
+        <div class="table-actions">
+            <!--<button type="submit" class="btn btn-primary btn-sm js-ajax-submit">{:lang('SORT')}</button>-->
+        </div>
+    </form>
+    <ul class="pagination">{$page|default=''}</ul>
+</div>
+<script src="__STATIC__/js/admin.js?v={$_static_version}"></script>
+</body>
+</html>

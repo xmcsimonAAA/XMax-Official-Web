@@ -1,0 +1,274 @@
+{
+  "name": "Join / Access",
+  "action": "portal/Page/index",
+  "description": "Join / Access模板文件",
+  "order": 10.0,
+  "more": {
+    "widgets": {
+      "box1": {
+        "title": "第一屏",
+        "display": "1",
+        "vars": {
+          "image": {
+            "title": "背景图片",
+            "value": "",
+            "type": "image",
+            "placeholder": "请选择背景图片",
+            "tip": ""
+          },
+          "title": {
+            "title": "标题",
+            "value": "Quick Access to Investing",
+            "type": "text",
+            "placeholder": "请输入标题",
+            "tip": "",
+            "rule": {
+              "require": true
+            }
+          },
+          "des": {
+            "title": "简介",
+            "value": "Xmax (Nasdaq: XMAX) is now available for investment through major brokers worldwide. Follow these three simple steps to participate in building humanity's future technologies.",
+            "type": "textarea",
+            "placeholder": "请输入简介",
+            "tip": "",
+            "rule": {
+              "require": true
+            }
+          },
+          "step": {
+            "title": "步骤",
+            "value": "",
+            "type": "array",
+            "item": {
+              "content": {
+                "title": "内容",
+                "value": "",
+                "type": "textarea",
+                "placeholder": "请输入内容"
+              }
+            }
+          }
+        }
+      },
+      "box2": {
+        "title": "第二屏",
+        "display": "1",
+        "vars": {
+          "title": {
+            "title": "标题",
+            "value": "Supported Brokers",
+            "type": "text",
+            "placeholder": "请输入标题",
+            "tip": "",
+            "rule": {
+              "require": true
+            }
+          },
+          "des": {
+            "title": "简介",
+            "value": "Xmax (Nasdaq: XMAX) is now available for investment through major brokers worldwide. Follow these three simple steps to participate in building humanity's future technologies.",
+            "type": "textarea",
+            "placeholder": "请输入简介",
+            "tip": "",
+            "rule": {
+              "require": true
+            }
+          },
+          "brokers": {
+            "title": "机构",
+            "value": "",
+            "type": "array",
+            "item": {
+              "brokersName": {
+                "title": "机构名称",
+                "value": "",
+                "type": "text",
+                "placeholder": "请输入机构名称"
+              },
+              "Country": {
+                "title": "国家/地区",
+                "value": "",
+                "type": "text",
+                "placeholder": "请输入国家/地区"
+              },
+              "XMAX": {
+                "title": "是否支持XMAX",
+                "value": "",
+                "type": "select",
+                "options": {
+                  "1": "是",
+                  "2": "否"
+                },
+                "placeholder": "请选择是否支持XMAX"
+              },
+              "link": {
+                "title": "跳转链接",
+                "value": "",
+                "type": "text",
+                "placeholder": "请输入跳转链接"
+              }
+            }
+          },
+          "disclaimer": {
+            "title": "免责声明",
+            "value": "Disclaimer: Any links to third-party brokerage websites are provided strictly for convenience. Such links do not constitute investment advice, a recommendation, or an endorsement of any products or services, and we assume no responsibility for their content.",
+            "type": "textarea",
+            "placeholder": "请输入简介",
+            "tip": "",
+            "rule": {
+              "require": true
+            }
+          }
+        }
+      },
+
+      "box3": {
+        "title": "第三屏",
+        "display": "1",
+        "vars": {
+          "title": {
+            "title": "标题",
+            "value": "Frequently Asked Questions About Opening an Account",
+            "type": "text",
+            "placeholder": "请输入标题",
+            "tip": "",
+            "rule": {
+              "require": true
+            }
+          },
+          "sub_title": {
+            "title": "副标题",
+            "value": "Suggested Layout: Collapsible Q&A sections—click a question to expand the detailed answer.",
+            "type": "textarea",
+            "placeholder": "请输入副标题",
+            "tip": "",
+            "rule": {
+              "require": true
+            }
+          },
+          "aq": {
+            "title": "问答",
+            "value": "",
+            "type": "textarea",
+            "placeholder": "请输入问答"
+          }
+        }
+      },
+
+      "box4": {
+        "title": "第四屏",
+        "display": "1",
+        "vars": {
+          "title": {
+            "title": "标题",
+            "value": "Investment Process Diagram",
+            "type": "text",
+            "placeholder": "请输入标题",
+            "tip": "",
+            "rule": {
+              "require": true
+            }
+          },
+          "process": {
+            "title": "流程",
+            "value": "",
+            "type": "array",
+            "item": {
+              "content": {
+                "title": "内容",
+                "value": "",
+                "type": "text",
+                "placeholder": "请输入内容"
+              }
+            }
+          }
+        }
+      },
+
+      "box5": {
+        "title": "第五屏",
+        "display": "1",
+        "vars": {
+          
+          "video": {
+            "title": "背景视频",
+            "value": "",
+            "type": "file",
+            "placeholder": "请选择背景视频",
+            "tip": ""
+          },
+          "image": {
+            "title": "背景图片",
+            "value": "",
+            "type": "image",
+            "placeholder": "请选择背景图片",
+            "tip": ""
+          },
+          "title": {
+            "title": "标题",
+            "value": "Global Investor Footprint",
+            "type": "text",
+            "placeholder": "请输入标题",
+            "tip": "",
+            "rule": {
+              "require": true
+            }
+          },
+          "des": {
+            "title": "内容",
+            "value": "Over 50,000 investors have participated in Xmax. Covering over 30 countries and regions worldwide. Investors include high-net-worth individuals, technology professionals, fund managers, value investors, and more.",
+            "type": "textarea",
+            "placeholder": "请输入内容",
+            "tip": "",
+            "rule": {
+              "require": true
+            }
+          }
+        }
+      },
+      "box6": {
+        "title": "第六屏",
+        "display": "1",
+        "vars": {
+          "image": {
+            "title": "背景图片",
+            "value": "",
+            "type": "image",
+            "placeholder": "请选择背景图片",
+            "tip": ""
+          },
+          "title": {
+            "title": "标题",
+            "value": "We're ready for you",
+            "type": "text",
+            "placeholder": "请输入标题",
+            "tip": "",
+            "rule": {
+              "require": true
+            }
+          },
+          "list": {
+            "title": "列表",
+            "value": "",
+            "type": "array",
+            "item": {
+              "name": {
+                "title": "名称",
+                "value": "",
+                "type": "text",
+                "placeholder": "请输入名称"
+              },
+              "file": {
+                "title": "文件",
+                "value": "",
+                "type": "file",
+                "placeholder": "请选择文件"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

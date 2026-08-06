@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{$page.post_title}</title>
+    <meta name="keywords" content="{$page.post_keywords}" />
+    <meta name="description" content="{$page.post_excerpt}" />
+    <include file="public@head" />
+    <hook name="before_head_end" />
+  </head>
+  <body
+    class="page-page portfolio-page"
+    style="background-image: url({:cmf_get_image_url($theme_vars['diwen'])})"
+  >
+    <include file="public@nav" />
+    <widget name="box1">
+      <div
+        class="box flex aic jcc"
+        style="
+          background-image: url('{:cmf_get_image_url($widget.vars.image)}');
+          padding-top: calc(64px + 2rem);
+        "
+      >
+        <div class="info flex aic jcc">
+          <div class="container text-white">
+            <h2 class="fw-600">{$widget.vars.title}</h2>
+            <div class="row"><p class="col-md-6">{$widget.vars.des}</p></div>
+          </div>
+        </div>
+      </div>
+    </widget>
+    <widget name="box2">
+      <div class="box2 py-4 py-md-5">
+        <div class="container my-5">
+          <div class="_T pt-4 pb-3 text-white text-center">
+            {$widget.vars.title}
+          </div>
+          <div class="d-flex aic jcc tabs mt-4" style="gap: 1rem">
+            <foreach name="$widget.vars.list" item="vo">
+              <span class="rounded">{$vo.tab}</span>
+            </foreach>
+          </div>
+          <foreach name="$widget.vars.list" item="vo">
+            <div
+              class="con mt-4 rounded-xl"
+              style="background-image: url('{:cmf_get_image_url($vo.icon)}')"
+            >
+              <div class="row">
+                <div class="col-md-10 col-lg-8 col-xl-6">
+                  <div class="info p-4 p-md-5">
+                    <h2>{$vo.title}</h2>
+                    <p class="mt-4 mb-0">{$vo.des}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </foreach>
+        </div>
+      </div>
+    </widget>
+    <widget name="box3">
+      <div class="box3 pb-4 pb-md-5" data-xAxis="{$widget.vars.xAxis}">
+        <div class="container mb-5 text-center">
+          <div class="_T pt-4 pb-3 text-white text-center">
+            {$widget.vars.title}
+          </div>
+          <div class="d-flex aic jcc tabs mt-4" style="gap: 1rem">
+            <span class="rounded">Invested Capital</span>
+            <span class="rounded">Valuation Growth</span>
+          </div>
+          <div class="con w-full">
+            <div class="row">
+              <div class="col-lg-7 mt-5">
+                <div
+                  id="echart1"
+                  data-series="{$widget.vars.tubiao1}"
+                  style="width: 100%; height: 450px"
+                ></div>
+              </div>
+              <div class="col-lg-5 mt-5">
+                <div class="w-full h-full d-flex flex-col aic jcc">
+                  <h2>Last Investment</h2>
+                  <p>{$widget.vars.last}</p>
+                  <h2 class="mt-5 pt-0 pt-md-4">Total Capital</h2>
+                  <p>{$widget.vars.total}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="con con2 w-full">
+            <div class="row">
+              <div class="col-lg-7 mt-5">
+                <div
+                  id="echart2"
+                  data-series="{$widget.vars.tubiao2}"
+                  style="width: 100%; height: 450px"
+                ></div>
+              </div>
+              <div class="col-lg-5 mt-5">
+                <div class="w-full h-full d-flex flex-col aic jcc">
+                  <h2>Valuation Increase</h2>
+                  <p>{$widget.vars.valuation}</p>
+                  <h2 class="mt-5 pt-0 pt-md-4">Equity Value Held by Xmax</h2>
+                  <p>{$widget.vars.equity}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </widget>
+    <widget name="box4">
+      <div class="box4 pb-4 pb-md-5">
+        <div class="container mb-5 text-center">
+          <div class="_T pt-4 pb-3 text-white text-center">
+            {$widget.vars.title}
+          </div>
+          <p class="ml-auto mr-auto lh-1/6 mt-3 pb-5">{$widget.vars.des}</p>
+          <div class="list flex aic jcc mt-md-5">
+            <foreach name="$widget.vars.list" item="vo">
+              <div class="item flex-1">
+                <p>{$vo.content}</p>
+              </div>
+            </foreach>
+          </div>
+        </div>
+      </div>
+    </widget>
+    <widget name="box5">
+      <div class="box5 pb-4 pb-md-5">
+        <div class="container mb-5 text-center">
+          <div class="_T pt-4 pb-3 text-white text-center">
+            {$widget.vars.title}
+          </div>
+          <div class="d-flex aic jcc tabs mt-4" style="gap: 1rem">
+            <foreach name="$widget.vars.list" item="vo">
+              <span class="rounded" data="{$vo.data}">{$vo.tab}</span>
+            </foreach>
+          </div>
+          <div class="mt-5">
+            <div id="echart3" data="" style="width: 100%; height: 500px"></div>
+          </div>
+        </div>
+      </div>
+    </widget>
+    <widget name="box6">
+      <div class="box6 pb-4 pb-md-5">
+        <div class="container mb-5 text-center">
+          <div class="_T pt-4 pb-3 text-white text-center">
+            {$widget.vars.title}
+          </div>
+          <div class="row">
+            <foreach name="$widget.vars.list" item="vo">
+              <div class="col-lg-4 mt-4 mt-md-5">
+                <div class="item h-full p-3 rounded-xl">
+                  <img src="{:cmf_get_image_url($vo.icon)}" alt="" />
+                  <h2>{$vo.title}</h2>
+                  <p>{$vo.des}</p>
+                </div>
+              </div>
+            </foreach>
+          </div>
+        </div>
+      </div>
+    </widget>
+    <widget name="box7">
+      <div
+        class="box box7 flex aic jcc"
+        style="
+          background-image: url('{:cmf_get_image_url($widget.vars.image)}');
+        "
+      >
+        <div class="info flex aic jcc">
+          <div class="container text-white">
+            <div class="row">
+              <div class="col-lg-10">
+                <h3 class="fw-600">{$widget.vars.title}</h3>
+                <p>{$widget.vars.des}</p>
+                <!--<if condition="$widget.vars.link">-->
+                <!--  <div class="flex aic">-->
+                <!--    <a-->
+                <!--      class="cu-btn flex aic jcc px15 py10 rounded round border"-->
+                <!--      href="{$widget.vars.link}"-->
+                <!--    >-->
+                <!--      <span>Learn More</span>-->
+                <!--      <i class="iconfont icon-outline-arrow-right-3 ml4"></i>-->
+                <!--    </a>-->
+                <!--  </div>-->
+                <!--</if>-->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </widget>
+    <widget name="box8">
+      <div
+        class="box flex aic jcc"
+        style="
+          background-image: url('{:cmf_get_image_url($widget.vars.image)}');
+        "
+      >
+        <div class="info flex aic jcc">
+          <div class="container text-white">
+            <div class="row jcfe">
+              <div class="col-lg-6">
+                <h3 class="fw-600">{$widget.vars.title}</h3>
+                <p>{$widget.vars.des}</p>
+                <if condition="$widget.vars.link">
+                  <div class="flex aic">
+                    <a
+                      class="cu-btn flex aic jcc px15 py10 rounded round border"
+                      href="{$widget.vars.link}"
+                    >
+                      <span>Learn More</span>
+                      <i class="iconfont icon-outline-arrow-right-3 ml4"></i>
+                    </a>
+                  </div>
+                </if>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </widget>
+    <widget name="box9">
+      <div
+        class="box flex aic jcc"
+        style="
+          background-image: url('{:cmf_get_image_url($widget.vars.image)}');
+        "
+      >
+        <div class="info flex aic jcc">
+          <div class="container text-white">
+            <div class="row">
+              <div class="col-lg-6">
+                <h3 class="fw-600">{$widget.vars.title}</h3>
+                <p>{$widget.vars.des}</p>
+
+                <if condition="$widget.vars.link">
+                  <div class="flex aic">
+                    <a
+                      class="cu-btn flex aic jcc px15 py10 rounded round border"
+                      href="{$widget.vars.link}"
+                    >
+                      <span>Learn More</span>
+                      <i class="iconfont icon-outline-arrow-right-3 ml4"></i>
+                    </a>
+                  </div>
+                </if>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </widget>
+    <widget name="box10">
+      <div
+        class="box box10 pt-5"
+        style="
+          background-image: url('{:cmf_get_image_url($widget.vars.image)}');
+        "
+      >
+        <div class="info flex aic jcc w-full pt-5">
+          <div class="container text-white">
+            <div class="row jcfe">
+              <div class="col-lg-10">
+                <div class="d-flex aic tabs-line mt-5">
+                  <span>Comprehensive</span>
+                  <php> $categoryIds = ''; </php>
+                  <portal:subCategories categoryId="1" item="vo">
+                    <php> $categoryIds .= $vo['id'] . ','; </php>
+                    <span>{$vo.name}</span>
+                  </portal:subCategories>
+                  <php> $categoryIds = rtrim($categoryIds, ','); </php>
+                </div>
+                <div class="con mt-5">
+                  <portal:articles
+                    limit="1"
+                    order="post.is_top DESC"
+                    categoryIds="$categoryIds"
+                  >
+                    <h3 class="fw-600 mb-3 pb-3">
+                      <a
+                        href="{:cmf_url('portal/Article/index',array('id'=>$vo['id']))}"
+                        class="text-white d-block lh-1/5"
+                      >
+                        {$vo.post_title}
+                      </a>
+                    </h3>
+                  </portal:articles>
+
+                  <portal:articles
+                    limit="6"
+                    order="post.published_time DESC"
+                    categoryIds="$categoryIds"
+                  >
+                    <a
+                      href="{:cmf_url('portal/Article/index',array('id'=>$vo['id']))}"
+                      class="a text-white d-block my-3 text-16 lh-1/5"
+                    >
+                      <portal:category id="$vo['category_id']" item="cat">
+                        [{$cat.name}]
+                      </portal:category><span class="ml-1">{$vo.post_title}</span>
+                    </a>
+                  </portal:articles>
+                  <div class="flex aic mt-4 pt-3">
+                    <a
+                      class="cu-btn flex aic jcc px15 py10 rounded round border"
+                      href="{:cmf_url('portal/List/index',array('id'=>2))}"
+                    >
+                      <span>Learn More</span>
+                      <i class="iconfont icon-outline-arrow-right-3 ml4"></i>
+                    </a>
+                  </div>
+                </div>
+                <portal:subCategories categoryId="1" item="cat">
+                  <div class="con mt-5">
+                    <portal:articles
+                      limit="1"
+                      order="post.is_top DESC"
+                      categoryIds="$cat.id"
+                    >
+                      <h3 class="fw-600 mb-3 pb-3">
+                        <a
+                          href="{:cmf_url('portal/Article/index',array('id'=>$vo['id']))}"
+                          class="text-white d-block lh-1/5"
+                        >
+                          {$vo.post_title}
+                        </a>
+                      </h3>
+                    </portal:articles>
+                    <portal:articles
+                      limit="6"
+                      order="post.published_time DESC"
+                      categoryIds="$cat.id"
+                    >
+                      <a
+                        href="{:cmf_url('portal/Article/index',array('id'=>$vo['id']))}"
+                        class="a text-white d-block my-3 text-16 lh-1/5"
+                      >
+                        [{$cat.name}] <span class="ml-1">{$vo.post_title}</span>
+                      </a>
+                    </portal:articles>
+                    <div class="flex aic mt-4 pt-3">
+                      <a
+                        class="cu-btn flex aic jcc px15 py10 rounded round border"
+                        href="{:cmf_url('portal/List/index',array('id'=>$cat['id']))}"
+                      >
+                        <span>Learn More</span>
+                        <i class="iconfont icon-outline-arrow-right-3 ml4"></i>
+                      </a>
+                    </div>
+                  </div>
+                </portal:subCategories>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </widget>
+    <include file="public@footer" />
+    <include file="public@scripts" />
+    <hook name="before_body_end" />
+    <script>
+      $(function () {
+        $(".box2 .tabs span").eq(0).addClass("active");
+        $(".box2 .con").eq(0).addClass("show");
+
+        $(".box3 .tabs span").eq(0).addClass("active");
+        $(".box3 .con").eq(0).addClass("show");
+
+        $(".box5 .tabs span").eq(0).addClass("active");
+
+        $(".box10 .tabs-line span").eq(0).addClass("active");
+        $(".box10 .con").eq(0).addClass("show");
+
+        $(".box2 .tabs span,.box10 .tabs-line span").mouseenter(function () {
+          $(this).addClass("active").siblings().removeClass("active");
+          $(this)
+            .parent()
+            .siblings(".con")
+            .eq($(this).index())
+            .addClass("show")
+            .siblings()
+            .removeClass("show");
+        });
+      });
+
+      $(function () {
+        let chartDom1 = document.getElementById("echart1");
+        if (chartDom1) {
+        let myChart1 = echarts.init(chartDom1);
+        let xAxisData = $(".box3").attr("data-xAxis")?.split(",") || [];
+        let seriesData1 =
+          $(".box3 #echart1").attr("data-series")?.split(",") || [];
+        let seriesData2 =
+          $(".box3 #echart2").attr("data-series")?.split("|") || [];
+        option1.xAxis[0].data = xAxisData;
+        option2.xAxis[0].data = xAxisData;
+
+        option1.series[0].data = seriesData1;
+        option2.series[0].data = seriesData2[0].split(",");
+        option2.series[1].data = seriesData2[1].split(",");
+
+        option1 && myChart1.setOption(option1);
+
+        $(".box3 .tabs span").mouseenter(function () {
+          $(this).addClass("active").siblings().removeClass("active");
+          $(this)
+            .parent()
+            .siblings(".con")
+            .eq($(this).index())
+            .addClass("show")
+            .siblings()
+            .removeClass("show");
+          if ($(this).index() === 0) return;
+          setTimeout(() => {
+            let chartDom2 = document.getElementById("echart2");
+              if (!chartDom2) return;
+            let myChart2 = echarts.init(chartDom2);
+            option2 && myChart2.setOption(option2);
+          }, 0);
+        });
+        }
+        // 初始化图表和处理数据的函数
+          function initEchart3() {
+          try {
+            let rawData = $(".box5 .tabs span").eq(0).attr("data").trim().split("\n");
+            rawData = rawData.map((item) => {
+              return item.split("|").map((value) => value.trim());
+            });
+            // console.log(rawData);
+            return processAndRenderChart(rawData);
+          } catch (error) {
+            return;
+          }
+        }
+        // 处理数据并渲染图表的函数
+        function processAndRenderChart(rawData) {
+          // 处理数据：转换为 "年份.月份比例" 格式（如2019.5代表2019年中）
+          const processedData = rawData.map(([date, value]) => {
+            // const [year, month] = date.split("-").map(Number);
+            // const yearValue = year + (month - 1) / 12; // 月份从1开始，转为0-11月的比例
+            return [date.replaceAll("-",'/'), value];
+          });
+          // console.log(processedData);
+
+          // 提取所有涉及的年份，用于X轴刻度
+          const years = [
+            ...new Set(rawData.map(([date]) => parseInt(date.split("-")[0]))),
+          ].sort((a, b) => a - b);
+
+          // 补充前后年份使刻度更完整
+          const minYear = `${years[0]}/01/01`;
+          const maxYear = `${years[years.length - 1]}/12/31`;
+
+          let chartDom3 = document.getElementById("echart3");
+          if (!chartDom3) return;
+          let myChart3 = echarts.init(chartDom3,null,{ locale: 'EN' });
+          let option3 = {
+            tooltip: {
+              show: true,
+              trigger: "axis",
+              backgroundColor: "rgba(0,0,0,0.7)",
+              borderColor: "#ffffff",
+              borderWidth: 1,
+              textStyle: {
+                color: "#ffffff",
+                fontSize: 14,
+                align: "left",
+                lineHeight: 24,
+              },
+              formatter: function (params) {
+                const index = params[0].dataIndex;
+                const [date, valuation, amount, investors] = rawData[index];
+
+                // 提取月和日部分
+                const dateParts = date.split("-");
+                // 假设日期格式为YYYY-MM-DD
+                const monthDay =
+                  dateParts.length >= 3
+                    ? `${dateParts[1]}/${dateParts[2]} ${dateParts[0]}` // 格式化为MM/DD
+                    : date; // 如果格式不对，保留原始日期
+
+                 return `Valuation: USD ${
+                 (valuation / 10).toFixed(3)
+                }B-Date: ${monthDay}<br/>Financing Amount: ${amount}<br/>Investors: ${investors}`;
+              },
+              axisPointer: {
+                type: "line",
+                lineStyle: {
+                  color: "rgba(255,255,255,.15)",
+                  width: 1,
+                },
+              },
+            },
+            grid: {
+              left: "20px",
+              right: "20px",
+              bottom: "2%",
+              top: "10%",
+              containLabel: true,
+            },
+            xAxis: [
+              {
+                type: "time", // 数值轴（基于年份.比例）
+                axisTick: {
+                  show: false,
+                  alignWithLabel: true,
+                },
+                axisLine: {
+                  symbol: ["none", "arrow"],
+                  lineStyle: {
+                    color: "#ffffff",
+                  },
+                },
+                axisLabel: {
+                  interval: 0,
+                  fontSize: 15,
+                  color: "#fff",
+                  margin: 10, 
+                  padding: [5, 0, 0, 0],  
+                },
+                // X轴范围：从最小年份到最大年份
+                min: minYear,
+                max: maxYear,
+                splitLine: {
+                  show: false,
+                },
+              },
+            ],
+            yAxis: [
+              {
+                type: "value",
+                axisTick: {
+                  show: false,
+                },
+                axisLine: {
+                  symbol: ["none", "arrow"],
+                  show: true,
+                  lineStyle: {
+                    color: "#fff",
+                  },
+                },
+                axisLabel: {
+                  fontSize: 12,
+                  color: "#fff",
+                  formatter: function (value, index) {
+                    return '$' +value / 10 + "B";
+                  }
+                },
+                splitLine: {
+                  show: false,
+                },
+              },
+            ],
+            series: [
+              {
+                itemStyle: {
+                  color: "#fff",
+                },
+                data: processedData,
+                type: "line",
+                symbol:
+                  "image://data:image/png;base64,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",
+                symbolSize: 16,
+                lineStyle: {
+                  width: 2,
+                  color: "#ffffff",
+                },
+              },
+            ],
+          };
+
+          option3 && myChart3.setOption(option3);
+          return myChart3;
+        }
+        // 初始化第一个图表
+        let myChart3 = initEchart3();
+
+        // 添加标签切换事件
+        $(".box5 .tabs span").mouseenter(function () {
+          $(this).addClass("active").siblings().removeClass("active");
+
+          // 清除当前图表
+          myChart3.clear();
+
+          // 获取当前标签的索引
+          const i = $(this).index();
+          // console.log("当前标签索引:", i);
+
+          // 获取当前标签的数据
+          const tabData = $(this).attr("data");
+          if (!tabData) return;
+
+          // 处理数据
+          let rawData = tabData.trim().split("\n");
+          rawData = rawData.map((item) => {
+            return item.split("|").map((value) => value.trim());
+          });
+
+          // console.log("更新的数据:", rawData);
+
+          // 重新渲染图表
+          myChart3 = processAndRenderChart(rawData);
+        });
+      });
+    </script>
+  </body>
+</html>

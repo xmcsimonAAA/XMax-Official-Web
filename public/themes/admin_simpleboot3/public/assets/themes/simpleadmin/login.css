@@ -1,0 +1,40 @@
+html,
+body {
+    background: #fff;
+    height: 100%;
+}
+
+body {
+    background: url('../../images/HD_wallpaper_2560x1600.jpg') center no-repeat;
+    background-size: cover;
+    height: 100%;
+}
+
+.form-control,
+.btn {
+    height: 42px;
+}
+
+.wrap {
+    height: 100%;
+
+    h1 {
+        font-weight: 400;
+        margin: 0 0 30px;
+        font-size: 30px;
+        letter-spacing: 2px;
+    }
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .box {
+        min-width: 360px;
+        padding: 40px;
+        background-color: rgba(255, 255, 255, .25);
+        border-radius: 15px;
+        -webkit-backdrop-filter: blur(2px);
+        backdrop-filter: blur(2px);
+    }
+}

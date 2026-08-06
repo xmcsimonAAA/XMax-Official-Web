@@ -1,0 +1,169 @@
+{
+  "name": "Investor Relations",
+  "action": "portal/Page/index",
+  "description": "Investor Relations模板文件",
+  "order": 10.0,
+  "more": {
+    "widgets": {
+      "box1": {
+        "title": "第一屏",
+        "display": "1",
+        "vars": {
+          "image": {
+            "title": "背景图片",
+            "value": "",
+            "type": "image",
+            "placeholder": "请选择背景图片",
+            "tip": ""
+          },
+          "title": {
+            "title": "标题",
+            "value": "Compliance Framework Overview",
+            "type": "text",
+            "placeholder": "请输入标题",
+            "tip": "",
+            "rule": {
+              "require": true
+            }
+          },
+          "des": {
+            "title": "简介",
+            "value": "Xmax is a Nasdaq-listed company, conducting all operations under the regulatory framework of the U.S. Securities and Exchange Commission (SEC). We are also subject to multi-layered oversight by FINRA, self-regulatory organizations, licensed broker-dealers, as well as leading international law and audit firms—ensuring our platform operates securely, transparently, and in full compliance with the law.",
+            "type": "textarea",
+            "placeholder": "请输入简介",
+            "tip": "",
+            "rule": {
+              "require": true
+            }
+          }
+        }
+      },
+      "box2": {
+        "title": "第二屏",
+        "display": "1",
+        "vars": {
+          "title": {
+            "title": "标题",
+            "value": "Network of Partner Institutions",
+            "type": "text",
+            "placeholder": "请输入标题",
+            "tip": "",
+            "rule": {
+              "require": true
+            }
+          },
+          "des": {
+            "title": "简介",
+            "value": "We collaborate with the world's most reputable legal and financial institutions to safeguard the security and lawful ownership of our investors' assets.",
+            "type": "textarea",
+            "placeholder": "请输入简介",
+            "tip": "",
+            "rule": {
+              "require": true
+            }
+          },
+          "list": {
+            "title": "列表",
+            "value": [],
+            "type": "array",
+            "item": {
+              "tag": {
+                "title": "标签",
+                "value": "",
+                "type": "text",
+                "placeholder": "请输入标签",
+                "rule": {
+                  "require": true
+                }
+              },
+              "companies": {
+                "title": "单位",
+                "value": "",
+                "type": "text",
+                "placeholder": "请输入单位",
+                "tip": "",
+                "rule": {
+                  "require": true
+                }
+              },
+              "logo": {
+                "title": "LOGO",
+                "value": "",
+                "type": "image",
+                "placeholder": "请选择LOGO",
+                "tip": ""
+              }, 
+              "content": {
+                "title": "内容",
+                "value": "",
+                "type": "textarea",
+                "placeholder": "请输入内容",
+                "tip": "",
+                "rule": {
+                  "require": true
+                }
+              }
+            }
+          }
+        }
+      },
+       
+      "box3": {
+        "title": "第三屏",
+        "display": "1",
+        "vars": {
+          "image": {
+            "title": "背景图片",
+            "value": "",
+            "type": "image",
+            "placeholder": "请选择背景图片",
+            "tip": ""
+          },
+          "title": {
+            "title": "标题",
+            "value": "Information Disclosure Policy",
+            "type": "text",
+            "placeholder": "请输入标题",
+            "tip": "",
+            "rule": {
+              "require": true
+            }
+          },
+          "des": {
+            "title": "简介",
+            "value": "Xmax complies with all Nasdaq and SEC disclosure standards. All material events—including key equity holdings, mergers & acquisitions, and valuation adjustments—are announced through official channels. Annual Reports (10-K) / Quarterly Reports (10-Q) Form 8-K for material event disclosures Equity holdings are available in real-time via the SEC EDGAR system",
+            "type": "textarea",
+            "placeholder": "请输入简介",
+            "tip": "",
+            "rule": {
+              "require": true
+            }
+          },
+          "list": {
+            "title": "列表",
+            "value": [],
+            "type": "array",
+            "item": {
+              "name": {
+                "title": "标签",
+                "value": "",
+                "type": "text",
+                "placeholder": "请输入标签",
+                "rule": {
+                  "require": true
+                }
+              }, 
+              "file": {
+                "title": "文件",
+                "value": "",
+                "type": "file",
+                "placeholder": "请选择文件",
+                "tip": ""
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

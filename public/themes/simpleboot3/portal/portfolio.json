@@ -1,0 +1,448 @@
+{
+  "name": "Portfolio",
+  "action": "portal/Page/index",
+  "description": "Portfolio模板文件",
+  "order": 10.0,
+  "more": {
+    "vars": {
+      "diwen": {
+        "title": "底纹",
+        "value": "",
+        "type": "image",
+        "placeholder": "请选择底纹"
+      }
+    },
+    "widgets": {
+      "box1": {
+        "title": "第一屏",
+        "display": "1",
+        "vars": {
+          "image": {
+            "title": "背景图片",
+            "value": "",
+            "type": "image",
+            "placeholder": "请选择背景图片",
+            "tip": ""
+          },
+          "title": {
+            "title": "标题",
+            "value": "Portfolio: Building a Core Asset Network for the Future Technology Ecosystem",
+            "type": "text",
+            "placeholder": "请输入标题",
+            "tip": "",
+            "rule": {
+              "require": true
+            }
+          },
+          "des": {
+            "title": "简介",
+            "value": "Xmax conducts rigorous evaluations of technological potential and breakthrough capabilities to identify and invest in frontier technology companies worldwide—those poised to redefine industry paradigms and advance human civilization. Our portfolio is not a mere collection of companies, but a systematically designed ecosystem of future-defining technologies. Investment Strategy:Value investing in humanity’s future technologies with a long-term horizon and diversified risk exposure.",
+            "type": "textarea",
+            "placeholder": "请输入简介",
+            "tip": "",
+            "rule": {
+              "require": true
+            }
+          }
+        }
+      },
+
+      "box2": {
+        "title": "第二屏",
+        "display": "1",
+        "vars": {
+          "title": {
+            "title": "标题",
+            "value": "Core Technology Pillars",
+            "type": "text",
+            "placeholder": "请输入标题",
+            "tip": "",
+            "rule": {
+              "require": true
+            }
+          },
+          "list": {
+            "title": "列表",
+            "value": [],
+            "type": "array",
+            "item": {
+              "icon": {
+                "title": "背景图",
+                "value": "",
+                "type": "image"
+              },
+              "tab": {
+                "title": "标签",
+                "value": "",
+                "type": "text",
+                "placeholder": "请输入标签",
+                "rule": {
+                  "require": true
+                }
+              },
+              "title": {
+                "title": "标题",
+                "value": "",
+                "type": "text",
+                "placeholder": "请输入标题",
+                "rule": {
+                  "require": true
+                }
+              },
+              "des": {
+                "title": "描述",
+                "value": "",
+                "type": "textarea",
+                "placeholder": "请输入描述"
+              }
+            }
+          }
+        }
+      },
+      "box3": {
+        "title": "第三屏",
+        "display": "1",
+        "vars": {
+          "title": {
+            "title": "标题",
+            "value": "Core Shareholding Structure (Real-Time Updates)",
+            "type": "text",
+            "placeholder": "请输入标题",
+            "tip": "",
+            "rule": {
+              "require": true
+            }
+          },
+          "xAxis": {
+            "title": "X轴项目名称(英文逗号隔开)",
+            "value": "",
+            "type": "text",
+            "placeholder": "请输入X轴项目名称",
+            "rule": {
+              "require": true
+            }
+          },
+          "tubiao1": {
+            "title": "Invested Capital 图表数据(英文逗号隔开)",
+            "value": "",
+            "type": "text",
+            "placeholder": "请输入图表数据",
+            "rule": {
+              "require": true
+            }
+          },
+          "tubiao2": {
+            "title": "Valuation Growth 图表数据(英文逗号隔开)",
+            "value": "",
+            "type": "text",
+            "placeholder": "|分隔符前面的是增长前，后面的是增长后",
+            "rule": {
+              "require": true
+            }
+          },
+          "last": {
+            "title": "Last Investment",
+            "value": "Date: August 1, 2025",
+            "type": "text",
+            "placeholder": "请输入"
+          },
+          "total": {
+            "title": "Total Capital",
+            "value": "Deployed: USD 60 million",
+            "type": "text",
+            "placeholder": "请输入"
+          },
+          "valuation": {
+            "title": "Valuation Increase",
+            "value": "+USD 32 million",
+            "type": "text",
+            "placeholder": "请输入"
+          },
+          "equity": {
+            "title": "Equity Value Held by Xmax",
+            "value": "USD 92 million",
+            "type": "text",
+            "placeholder": "请输入"
+          }
+        }
+      },
+
+      "box4": {
+        "title": "第四屏",
+        "display": "1",
+        "vars": {
+          "title": {
+            "title": "标题",
+            "value": "Full View of the Legal Equity Acquisition Path",
+            "type": "text",
+            "placeholder": "请输入标题",
+            "tip": "",
+            "rule": {
+              "require": true
+            }
+          },
+          "des": {
+            "title": "简介",
+            "value": "Private equity transactions are often complex, but we choose the safest route forward. From deal structure design and legal review to audit inclusion in financial statements, we apply the rigorous standards of a publicly listed company to cut through every layer of financial opacity.",
+            "type": "text",
+            "placeholder": "请输入简介",
+            "tip": "",
+            "rule": {
+              "require": true
+            }
+          },
+          "list": {
+            "title": "列表",
+            "value": [],
+            "type": "array",
+            "item": {
+              "content": {
+                "title": "内容",
+                "value": "",
+                "type": "textarea",
+                "placeholder": "请输入内容",
+                "rule": {
+                  "require": true
+                }
+              }
+            }
+          }
+        }
+      },
+
+      "box5": {
+        "title": "第五屏",
+        "display": "1",
+        "vars": {
+          "title": {
+            "title": "标题",
+            "value": "Historical Valuation Timeline (as of Aug 1, 2025)",
+            "type": "text",
+            "placeholder": "请输入标题",
+            "tip": "",
+            "rule": {
+              "require": true
+            }
+          },
+          "list": {
+            "title": "列表",
+            "value": [],
+            "type": "array",
+            "item": {
+              "tab": {
+                "title": "项目名称",
+                "value": "",
+                "type": "text",
+                "placeholder": "请输入项目名称",
+                "rule": {
+                  "require": true
+                }
+              },
+              "data": {
+                "title": "数据",
+                "value": "",
+                "type": "textarea",
+                "placeholder": "参考格式：估值|日期|融资金额|投资者，一行一个"
+              }
+            }
+          }
+        }
+      },
+      "box6": {
+        "title": "第六屏",
+        "display": "1",
+        "vars": {
+          "title": {
+            "title": "标题",
+            "value": "Risk Disclosure & Investment Strategy",
+            "type": "text",
+            "placeholder": "请输入标题",
+            "tip": "",
+            "rule": {
+              "require": true
+            }
+          },
+          "list": {
+            "title": "列表",
+            "value": [],
+            "type": "array",
+            "item": {
+              "icon": {
+                "title": "图标",
+                "value": "",
+                "type": "image"
+              },
+              "title": {
+                "title": "标题",
+                "value": "",
+                "type": "text",
+                "placeholder": "请输入标题",
+                "rule": {
+                  "require": true
+                }
+              },
+              "des": {
+                "title": "描述",
+                "value": "",
+                "type": "textarea",
+                "placeholder": "请输入描述"
+              }
+            }
+          }
+        }
+      },
+      "box7": {
+        "title": "第七屏",
+        "display": "1",
+        "vars": {
+          "image": {
+            "title": "背景图片",
+            "value": "",
+            "type": "image",
+            "placeholder": "请选择背景图片",
+            "tip": ""
+          },
+          "title": {
+            "title": "标题",
+            "value": "Primary Market Within Reach — Investing in Humanity's Future Technologies",
+            "type": "text",
+            "placeholder": "请输入标题",
+            "tip": "",
+            "rule": {
+              "require": true
+            }
+          },
+          "des": {
+            "title": "简介",
+            "value": "Xmax leverages the structure of a publicly listed company to give everyday investors access to the primary entry point of future-defining industries. The true primary market is no longer out of reach. High-quality assets can withstand the test of time and the power of compounding—such as Elon Musk's ventures SpaceX, xAI, and Neuralink, each with immense future potential.",
+            "type": "textarea",
+            "placeholder": "请输入简介",
+            "tip": "",
+            "rule": {
+              "require": true
+            }
+          },
+          "link": {
+            "title": "链接",
+            "value": "",
+            "type": "text",
+            "placeholder": "请输入链接",
+            "tip": "",
+            "rule": {
+              "require": true
+            }
+          }
+        }
+      },
+      "box8": {
+        "title": "第八屏",
+        "display": "1",
+        "vars": {
+          "image": {
+            "title": "背景图片",
+            "value": "",
+            "type": "image",
+            "placeholder": "请选择背景图片",
+            "tip": ""
+          },
+          "title": {
+            "title": "标题",
+            "value": "Investor Relations",
+            "type": "text",
+            "placeholder": "请输入标题",
+            "tip": "",
+            "rule": {
+              "require": true
+            }
+          },
+          "des": {
+            "title": "简介",
+            "value": "Xmax is committed to connecting global investors with humanity's future technologies—through fully compliant, regulated pathways. As a Nasdaq-listed company (Ticker: XMAX), we continuously disclose our financial and operational information, operating under dual oversight by the SEC and FINRA. This ensures that every investor can make decisions with clarity, transparency, and a long-term value perspective.",
+            "type": "textarea",
+            "placeholder": "请输入简介",
+            "tip": "",
+            "rule": {
+              "require": true
+            }
+          },
+          "link": {
+            "title": "链接",
+            "value": "",
+            "type": "text",
+            "placeholder": "请输入链接",
+            "tip": "",
+            "rule": {
+              "require": true
+            }
+          }
+        }
+      },
+      "box9": {
+        "title": "第九屏",
+        "display": "1",
+        "vars": {
+          "image": {
+            "title": "背景图片",
+            "value": "",
+            "type": "image",
+            "placeholder": "请选择背景图片",
+            "tip": ""
+          },
+          "title": {
+            "title": "标题",
+            "value": "Financial Documents",
+            "type": "text",
+            "placeholder": "请输入标题",
+            "tip": "",
+            "rule": {
+              "require": true
+            }
+          },
+          "des": {
+            "title": "简介",
+            "value": "All financial data disclosed by Xmax is audited by independent third-party accounting firms and prepared in accordance with U.S. GAAP standards. Reports are filed regularly with the U.S. Securities and Exchange Commission (SEC). Annual Reports (e.g., 2024, 2023 — PDF Download) Quarterly Reports (Q1 / Q2 / Q3 / Q4 Audited Financial Statements Asset Valuation & Net Asset Value Reports Special Investment Reports (including detailed holdings in Elon Musk–related assets",
+            "type": "textarea",
+            "placeholder": "请输入简介",
+            "tip": "",
+            "rule": {
+              "require": true
+            }
+          },
+          "link": {
+            "title": "链接",
+            "value": "",
+            "type": "text",
+            "placeholder": "请输入链接",
+            "tip": "",
+            "rule": {
+              "require": true
+            }
+          }
+        }
+      },
+      "box10": {
+        "title": "第十屏",
+        "display": "1",
+        "vars": {
+          "image": {
+            "title": "背景图片",
+            "value": "",
+            "type": "image",
+            "placeholder": "请选择背景图片",
+            "tip": ""
+          },
+          "title": {
+            "title": "标题",
+            "value": "Announcement and Disclosure",
+            "type": "text",
+            "placeholder": "请输入标题",
+            "tip": "",
+            "rule": {
+              "require": true
+            }
+          }
+        }
+      }
+    }
+  }
+}

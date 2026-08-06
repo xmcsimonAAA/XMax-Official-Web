@@ -1,0 +1,433 @@
+{
+  "name": "首页",
+  "action": "portal/Index/index",
+  "description": "首页模板文件",
+  "order": 5.0,
+  "more": {
+    "widgets": {
+      "box1": {
+        "title": "第一屏",
+        "display": "1",
+        "vars": {
+          "title": {
+            "title": "标题",
+            "value": "Invest in the Future of Humanity",
+            "type": "text",
+            "placeholder": "请输入标题",
+            "tip": "",
+            "rule": {
+              "require": true
+            }
+          },
+          "des": {
+            "title": "简介",
+            "value": "Xmax (NASDAQ: XMAX) is a U.S.-based, Nasdaq-listed company dedicated to investing in technologies shaping the future of humanity. We advance the frontiers of innovation across multiple sectors—including artificial intelligence, space exploration, and brain–computer interfaces—featuring select investments in ventures led by Elon Musk.",
+            "type": "textarea",
+            "placeholder": "请输入简介",
+            "tip": "",
+            "rule": {
+              "require": true
+            }
+          },
+          "link": {
+            "title": "跳转连接",
+            "value": "",
+            "type": "text",
+            "placeholder": "请输入跳转连接",
+            "tip": ""
+          },
+          "video": {
+            "title": "背景视频",
+            "value": "",
+            "type": "file",
+            "placeholder": "请选择背景视频",
+            "tip": ""
+          },
+          "image": {
+            "title": "移动端背景图",
+            "value": "",
+            "type": "image",
+            "placeholder": "请选择移动端背景图",
+            "tip": ""
+          }
+        }
+      },
+      "box2": {
+        "title": "第二屏",
+        "display": "1",
+        "vars": {
+          "title": {
+            "title": "标题",
+            "value": "Global Impact",
+            "type": "text",
+            "placeholder": "请输入标题",
+            "tip": "",
+            "rule": {
+              "require": true
+            }
+          },
+          "des": {
+            "title": "简介",
+            "value": "Redefining the Technology Investment Network for the Future of the World XMAX's investment footprint spans the globe, connecting the world's leading centers of technological innovation. Our capital is more than financial backing—it is a catalyst driving the advancement of human civilization. Through strategic global positioning, we empower the most groundbreaking technological ideas to become reality.",
+            "type": "textarea",
+            "placeholder": "请输入简介",
+            "tip": "",
+            "rule": {
+              "require": true
+            }
+          },
+          "image": {
+            "title": "背景图片",
+            "value": "",
+            "type": "image",
+            "placeholder": "请选择背景图片",
+            "tip": ""
+          }
+        }
+      },
+      "box3": {
+        "title": "第三屏",
+        "display": "1",
+        "vars": {
+          "title": {
+            "title": "标题",
+            "value": "Why Xmax",
+            "type": "text",
+            "placeholder": "请输入标题",
+            "tip": "",
+            "rule": {
+              "require": true
+            }
+          },
+          "list": {
+            "title": "列表",
+            "value": [],
+            "type": "array",
+            "item": {
+              "icon": {
+                "title": "缩略图",
+                "value": "",
+                "type": "image"
+              },
+              "title": {
+                "title": "标题",
+                "value": "",
+                "type": "text",
+                "placeholder": "请输入标题",
+                "rule": {
+                  "require": true
+                }
+              },
+              "des": {
+                "title": "描述",
+                "value": "",
+                "type": "textarea",
+                "placeholder": "请输入描述"
+              }
+            }
+          }
+        }
+      },
+      "box4": {
+        "title": "第四屏",
+        "display": "1",
+        "vars": {
+          "title": {
+            "title": "标题",
+            "value": "Our Portfolio",
+            "type": "text",
+            "placeholder": "请输入标题",
+            "tip": "",
+            "rule": {
+              "require": true
+            }
+          },
+          "list": {
+            "title": "列表",
+            "value": [],
+            "type": "array",
+            "item": {
+              "icon": {
+                "title": "背景图片",
+                "value": "",
+                "type": "image"
+              },
+              "title": {
+                "title": "标题",
+                "value": "",
+                "type": "text",
+                "placeholder": "请输入标题",
+                "rule": {
+                  "require": true
+                }
+              },
+              "des": {
+                "title": "描述",
+                "value": "",
+                "type": "textarea",
+                "placeholder": "请输入描述"
+              }
+            }
+          }
+        }
+      },
+      "box5": {
+        "title": "第五屏",
+        "display": "1",
+        "vars": {
+          "image": {
+            "title": "背景图片",
+            "value": "",
+            "type": "image",
+            "placeholder": "请选择背景图片",
+            "tip": ""
+          },
+          "title": {
+            "title": "标题",
+            "value": "How to Invest",
+            "type": "text",
+            "placeholder": "请输入标题",
+            "tip": "",
+            "rule": {
+              "require": true
+            }
+          },
+          "sub_title": {
+            "title": "副标题",
+            "value": "Investing in humanity's future has never been easier.",
+            "type": "text",
+            "placeholder": "请输入副标题",
+            "tip": "",
+            "rule": {
+              "require": true
+            }
+          },
+          "des_title": {
+            "title": "列表内容标题",
+            "value": "Three simple steps:",
+            "type": "text",
+            "placeholder": "请输入列表内容标题",
+            "tip": "",
+            "rule": {
+              "require": true
+            }
+          },
+          "list": {
+            "title": "内容列表",
+            "value": [],
+            "type": "array",
+            "item": {
+              "content": {
+                "title": "描述",
+                "value": "",
+                "type": "textarea",
+                "placeholder": "请输入描述"
+              }
+            }
+          }
+        }
+      },
+      "box6": {
+        "title": "第六屏",
+        "display": "1",
+        "vars": {
+          "title": {
+            "title": "标题",
+            "value": "Compliance & Transparency",
+            "type": "text",
+            "placeholder": "请输入标题",
+            "tip": "",
+            "rule": {
+              "require": true
+            }
+          },
+          "sub_title": {
+            "title": "副标题",
+            "value": "We operate with full transparency under rigorous regulatory oversight, ensuring every asset is clearly sourced and legally structured.",
+            "type": "text",
+            "placeholder": "请输入副标题",
+            "tip": "",
+            "rule": {
+              "require": true
+            }
+          },
+          "list": {
+            "title": "内容列表",
+            "value": [],
+            "type": "array",
+            "item": {
+              "icon": {
+                "title": "图标",
+                "value": "",
+                "type": "image"
+              },
+              "title": {
+                "title": "标题",
+                "value": "",
+                "type": "text",
+                "placeholder": "请输入标题",
+                "rule": {
+                  "require": true
+                }
+              },
+              "des": {
+                "title": "描述",
+                "value": "",
+                "type": "textarea",
+                "placeholder": "请输入描述"
+              }
+            }
+          },
+          "footer_des": {
+            "title": "底部文字",
+            "value": "Xmax is backed by leading global institutions.",
+            "type": "text",
+            "placeholder": "请输入底部文字",
+            "tip": "",
+            "rule": {
+              "require": true
+            }
+          }
+        }
+      },
+      "box7": {
+        "title": "第七屏",
+        "display": "1",
+        "vars": {
+          "title": {
+            "title": "标题",
+            "value": "Xmax Market Performance",
+            "type": "text",
+            "placeholder": "请输入标题",
+            "tip": "",
+            "rule": {
+              "require": true
+            }
+          },
+          "t1":{
+            "title": "标题",
+            "value": "Xmax total market value",
+            "type": "text",
+            "placeholder": "请输入总金额"
+          },
+          "v1":{
+            "title": "标题1对应的值",
+            "value": "$0M",
+            "type": "text",
+            "placeholder": "请输入"
+          },
+          "t2":{
+            "title": "标题2",
+            "value": "Value of Musk's companyshares",
+            "type": "text",
+            "placeholder": "请输入"
+          },
+          "v2":{
+            "title": "标题2对应的值",
+            "value": "$0M",
+            "type": "text",
+            "placeholder": "请输入"
+          },
+          "t3":{
+            "title": "标题3",
+            "value": "Last time lincreased my stake in Musk's company(August 2025)",
+            "type": "text",
+            "placeholder": "请输入"
+          },
+          "v3":{
+            "title": "标题3对应的值",
+            "value": "$0M",
+            "type": "text",
+            "placeholder": "请输入"
+          }
+        }
+      },
+      "box8": {
+        "title": "第八屏",
+        "display": "1",
+        "vars": {
+          "title": {
+            "title": "标题",
+            "value": "Media & Press",
+            "type": "text",
+            "placeholder": "请输入标题",
+            "tip": "",
+            "rule": {
+              "require": true
+            }
+          },
+          "article_category_id": {
+            "title": "文章分类ID",
+            "value": "",
+            "type": "text",
+            "dataSource": {
+              "api": "portal/Category/index",
+              "multi": true
+            },
+            "placeholder": "请选择分类",
+            "tip": "",
+            "rule": {
+              "require": true
+            }
+          },
+          "video_category_id": {
+            "title": "视频分类ID",
+            "value": "",
+            "type": "text",
+            "dataSource": {
+              "api": "portal/Category/index",
+              "multi": true
+            },
+            "placeholder": "请选择分类",
+            "tip": "",
+            "rule": {
+              "require": true
+            }
+          }
+        }
+      },
+
+      "box9": {
+        "title": "第九  屏",
+        "display": "1",
+        "vars": {
+          "image": {
+            "title": "背景图",
+            "value": "",
+            "type": "image",
+            "placeholder": "请选择背景图",
+            "tip": ""
+          },
+          "title": {
+            "title": "标题",
+            "value": "Become a part of Xmax Embrace the future of technology and share in the growth dividends of this era.",
+            "type": "textarea",
+            "placeholder": "请输入标题",
+            "tip": "",
+            "rule": {
+              "require": true
+            }
+          },
+          "linktext": {
+            "title": "跳转按钮文字",
+            "value": "",
+            "type": "text",
+            "placeholder": "请输入跳转按钮文字"
+          },
+          "link": {
+            "title": "跳转连接",
+            "value": "",
+            "type": "text",
+            "placeholder": "请输入跳转连接"
+          },
+          "sub_title": {
+            "title": "底部文字",
+            "value": "Brokerage Connection/Account Opening Guide",
+            "type": "text",
+            "placeholder": "请输入底部文字"
+          }
+        }
+      }
+    }
+  }
+}

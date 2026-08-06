@@ -1,0 +1,157 @@
+<footer>
+  <div class="box10">
+    <if condition="$theme_vars['footerVideo']">
+      <video
+        autoplay
+        muted
+        loop
+        src="{:cmf_get_image_url($theme_vars['footerVideo'])}"
+        class="d-none d-lg-block pos-a"
+      ></video>
+    </if>
+    <div class="container pt-5">
+      <div class="row aic jcsb">
+        <div class="col-lg-7 l mt-4 mt-md-5 wow fadeInUp">
+          <h2 class="lh-1/6">
+            Subscribe to receive the latest insights from XMax.
+          </h2>
+        </div>
+        <div class="col-lg-5 col-xl-4 r mt-4 mt-md-5 wow fadeInUp">
+          <form id="emailForm" enctype="multipart/form-data" method="post">
+            <p>Email address*</p>
+            <div class="flex mt-3">
+              <input
+                type="text"
+                name="email"
+                id="receive_email"
+                class="flex-1 rounded"
+                placeholder="your email address"
+              />
+
+              <button class="rounded ml-3" submit onclick="emailSubmit()">
+                Submit
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="to-top flex aic jcc mt-5 pt-4 wow fadeInUp">
+        <span onclick="backToTop(this)">Back to top</span>
+      </div>
+    </div>
+  </div>
+  <div class="box11 py-5">
+    <div class="container">
+      <div class="flex aic jcc" style="gap: 1.5rem">
+        <foreach name="$theme_vars['app']" item="vo">
+          <a href="{$vo.link}" target="_blank">
+            <img
+              src="{:cmf_get_image_url($vo.logo)}"
+              class="d-block h-32"
+              alt="{$vo.name}"
+            />
+          </a>
+        </foreach>
+        <!-- <a href="">
+          <img
+            src="__TMPL__/public/assets/images/icon-2.png"
+            class="d-block h-32"
+            alt=""
+          />
+        </a>
+        <a href="" class="ml-5">
+          <img
+            src="__TMPL__/public/assets/images/icon-1.png"
+            class="d-block h-32"
+            alt=""
+          />
+        </a> -->
+      </div>
+      <div class="text-center mt-4">
+        <!-- <a
+          href="{:cmf_url('portal/Page/index',array('id'=>8))}"
+          class="text-white"
+          >Contact Us</a
+        >
+        <a href="/page/13.html" class="text-white ml-4">Careers</a>
+        <a
+          href="{:cmf_url('portal/Page/index',array('id'=>4))}"
+          class="text-white ml-4"
+          >News Center</a
+        >
+        <a href="" class="text-white ml-4">Privacy Policy</a>
+        <a href="" class="text-white ml-4">Regulatory Disclosure</a> -->
+
+        <navigation nav-id="2" max-level="0" class="d-flex aic jcc footer-nav">
+          <navigationMenu>
+            <a
+              class="text-white mx-3"
+              href="{$menu.href|default=''}"
+              target="{$menu.target|default=''}"
+            >
+              {$menu.name|default=''}
+            </a>
+          </navigationMenu>
+        </navigation>
+      </div>
+      <!-- <div class="text-center no-translate">Xmax © 2025</div> -->
+    </div>
+  </div>
+</footer>
+<script>
+  translate.language.setLocal("english");
+  translate.selectLanguageTag.show = false;
+  translate.ignore.class.push("no-translate"); //翻译时指定忽略的class name，凡是class name 在这里面的，都不进行翻译。如果不设置默认只有 ignore 这一个
+  //   translate.setAutoDiscriminateLocalLanguage(); //设置用户第一次用时，自动识别其所在国家的语种进行切换
+  translate.service.use("client.edge"); //设置翻译通道，上线时建议切换到更稳定高速的翻译通道，参考文档： http://translate.zvo.cn/545867.html
+  translate.listener.start(); //开启页面元素动态监控，js改变的内容也会被翻译，参考文档： http://translate.zvo.cn/4067.html
+  translate.execute(); //执行翻译初始化操作，显示出select语言选择
+
+  // 获取表单元素
+  const emailForm = document.getElementById("emailForm");
+
+  if (emailForm) {
+    // 监听表单提交事件
+    emailForm.addEventListener("submit", function (event) {
+      // 阻止默认跳转行为
+      event.preventDefault();
+      const val = $("#receive_email").val();
+      if (!val) return;
+      // 邮箱格式正则校验
+      const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+      if (!emailPattern.test(val)) {
+        alert("Invalid email format, please check and try again");
+        return;
+      }
+      // 创建 FormData 对象
+      const formData = new FormData(emailForm);
+
+      // 发起请求
+      fetch("/api/portal/email", {
+        method: "POST",
+        body: formData,
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("网络响应异常");
+          }
+          return response.json();
+        })
+        .then((data) => {
+          console.log("接口响应:", data);
+          // 可以在这里添加处理成功响应的逻辑，例如显示提示信息、跳转页面等
+          if (data.code === 1) {
+            alert("Subscription Successful");
+            // 可以添加跳转页面的逻辑
+            window.location.href = "/";
+          } else {
+            alert("Subscription Failed: " + data.msg);
+          }
+        })
+        .catch((error) => {
+          console.error("请求出错:", error);
+          alert("Request error, please try again later");
+        });
+    });
+  }
+</script>

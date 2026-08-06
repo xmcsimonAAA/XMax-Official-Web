@@ -1,0 +1,9 @@
+{
+  "name": "自定义单页",
+  "action": "portal/Page/index",
+  "description": "自定义单页模板文件",
+  "order": 10.0,
+  "more": {
+     
+  }
+}

@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{$page.post_title}</title>
+    <meta name="keywords" content="{$page.post_keywords}" />
+    <meta name="description" content="{$page.post_excerpt}" />
+    <include file="public@head" />
+    <hook name="before_head_end" />
+  </head>
+  <body class="page-page media-page">
+    <include file="public@nav" />
+    <widget name="box1">
+      <div
+        class="box flex aic jcc"
+        style="
+          background-image: url('{:cmf_get_image_url($widget.vars.image)}');
+          padding-top: calc(64px + 2rem);
+        "
+      >
+        <div class="info flex aic jcc">
+          <div class="container text-white">
+            <h2 class="fw-600">{$widget.vars.title}</h2>
+            <div class="row"><p class="col-md-6">{$widget.vars.des}</p></div>
+          </div>
+        </div>
+      </div>
+    </widget>
+    <widget name="box2">
+      <div class="box2">
+        <div class="container my-5">
+          <div class="_T pt-4 pb-3 text-white text-center">
+            {$widget.vars.title}
+          </div>
+          <div class="row news">
+            <portal:articles
+              limit="3"
+              order="post.post_hits DESC"
+              categoryIds="$widget.vars.article_category_id"
+            >
+              <div class="col-md-6 col-lg-4 new mt-3 mt-lg-4">
+                <a
+                  href="{:cmf_url('portal/Article/index',array('id'=>$vo['id']))}"
+                  class="item rounded-xl d-flex flex-col overflow-hidden text-white h-full"
+                >
+                  <div class="img-box">
+                    <div
+                    class="img w-full"
+                    style="
+                      background-image: url('{:cmf_get_image_url($vo.more.thumbnail)}');
+                    "
+                  ></div>
+                  </div>
+                  <div class="info p-3 flex-1 w-full d-flex flex-col">
+                    <div class="flex-1">
+                      <div class="flex aic jcsb">
+                        <!--<span class="text-red-500">Viewpoint</span>-->
+                        <span
+                          ><?php echo date('F j.Y', $vo['published_time']); ?></span
+                        >
+                      </div>
+                      <h2 class="text-20 my-3 line-2">{$vo.post_title}</h2>
+                      <p class="mb-4 lh-1/6 line-2">{$vo.post_excerpt}</p>
+                    </div>
+                    <i class="iconfont icon-outline-arrow-right-3 text-28"></i>
+                  </div>
+                </a>
+              </div>
+            </portal:articles>
+          </div>
+          <div class="flex aic jcfe mt-4">
+            <a
+              class="cu-btn flex aic jcc px15 py10 rounded round border"
+              href="{:cmf_url('portal/List/index',array('id'=>2))}"
+            >
+              <span>Read More</span>
+              <i class="iconfont icon-outline-arrow-right-3 ml4"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </widget>
+    <widget name="box3">
+      <div class="box3">
+        <div class="container my-5">
+          <div class="_T pt-4 pb-3 text-white text-center">
+            {$widget.vars.title}
+          </div>
+          <div class="row jcc">
+            <div class="col-lg-6 mt-5">
+              <div class="px-md-5">
+                <div class="tabs flex aic jcc mb-5">
+                  <a href="__TMPL__/public/assets/images/logo-5.png" download="png_color" class="active rounded-lg" onclick="change(this)">PNG</a>
+                  <a href="__TMPL__/public/assets/images/logo.svg" download="logo.svg" class="rounded-lg" onclick="change(this)">SVG</a>
+                </div>
+                <div class="img" style="background-color:#fff">
+                  <img src="__TMPL__/public/assets/images/logo-5.png" alt="" />
+                </div>
+              </div>
+            </div>
+            <!--<div class="col-lg-6 mt-5">-->
+            <!--  <div class="px-md-5">-->
+            <!--    <div class="tabs flex aic jcc mb-5">-->
+            <!--      <a href="{:cmf_get_image_url($widget.vars.png_b)}" download="png_black_white" class="active rounded-lg" onclick="change(this,1)">Black and White</a>-->
+            <!--      <a href="{:cmf_get_image_url($widget.vars.png_c)}" download="png_color" class="rounded-lg" onclick="change(this,2)">Color</a>-->
+            <!--    </div>-->
+            <!--    <div class="img black_white">-->
+            <!--      <img src="__TMPL__/public/assets/images/logo-3.png" class="black_white_img" alt="" />-->
+            <!--      <img src="__TMPL__/public/assets/images/logo-4.png" class="color_img" alt="" />-->
+            <!--    </div>-->
+            <!--  </div>-->
+            <!--</div>-->
+          </div>
+        </div>
+      </div>
+    </widget>
+    <widget name="box4">
+      <div
+        class="box box4"
+        style="
+          background-image: url('{:cmf_get_image_url($widget.vars.image)}');
+          padding-top: calc(64px + 2rem);
+          padding-bottom: calc(64px + 2rem);
+        "
+      >
+        <div class="info w-full h-full">
+          <div class="container text-white flex flex-col aic h-full">
+            <h2 class="fw-600 text-center">{$widget.vars.title}</h2>
+            <div class="con flex-1 flex flex-col aifs jcc w-full">
+              <h4 style="font-size: 2em">{$widget.vars.sub_title}</h4>
+              <p>{$widget.vars.des}</p>
+              <a class="cu-btn rounded-lg" onclick="dakai('.box5')">Apply for Collaboration</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </widget>
+    <widget name="box5">
+      <div class="box5" id="apply">
+        <div class="container pt-4 pb-5 px-4 px-md-5 pos-r">
+          <div class="guan" ><i class="iconfont icon-guanbi text-24"></i></div>
+          <div class="_T pt-4 pb-3 text-white text-center">
+            {$widget.vars.title}
+          </div>
+          <p class="text-center">{$widget.vars.sub_title}</p>
+          <div class="form mt-5">
+            <h4>Basic Information *</h4>
+            <form  id="messageForm" enctype="multipart/form-data" method="post" >
+              <div class="row">
+                <div class="col-md-6 mt-4 flex flex-col">
+                  <label>Company Name*</label>
+                  <input
+                    class="form-control bitian"
+                    name="company_name"
+                    id="company_name"
+                    required
+                    type="text"
+                  />
+                </div>
+                <div class="col-md-6 mt-4 flex flex-col">
+                  <label>Contacts* (Name / Position)</label>
+                  <input
+                    class="form-control bitian"
+                    name="contact"
+                    id="contact"
+                    required
+                    type="text"
+                  />
+                </div>
+                <div class="col-md-6 mt-4 flex flex-col">
+                  <label>Contact Details* (Phone / Email)</label>
+                  <input
+                    class="form-control bitian"
+                    name="contact_detail"
+                    id="contact_detail"
+                    required
+                    type="text"
+                  />
+                </div>
+                <div class="col-md-6 mt-4 flex flex-col is-select" >
+                  <label>Country / Region*</label>
+                    <div class="input-box pos-r">
+                      <input
+                      class="form-control bitian"
+                      name="country"
+                      id="country"
+                      required
+                      type="text"
+                    />
+                    <div class="select pos-a"><i class="iconfont icon-xiasanjiaojiantou"></i></div>
+                    <ul class="opthions pos-a" type="Country"></ul>
+                  </div>
+                </div>
+                <div class="col-md-6 mt-4 flex flex-col is-select" >
+                  <label>Type of Collaboration*</label>
+                    <div class="input-box pos-r">
+                      <input
+                      class="form-control bitian"
+                      name="collaboration"
+                      id="collaboration"
+                      required
+                      type="text"
+                    />
+                    <div class="select pos-a"><i class="iconfont icon-xiasanjiaojiantou"></i></div>
+                    <ul class="opthions pos-a" type="Collaboration"></ul>
+                  </div>
+                </div> 
+                <div class="col-12 mt-4 flex flex-col">
+                  <label>Collaboration Details:：</label>
+                  <textarea
+                    class="form-control bitian"
+                    name="details"
+                    id="details" 
+                    placeholder="Please briefly describe your cooperation needs (e.g., business scale, expected timeline, special requirements, etc.)500 words or less"
+                  ></textarea>
+                </div>
+                <div class="flex aic jcc w-full mt-4">
+                  <input class="cu-btn btn-default" name="submit" type="submit" value="Submit">&nbsp;</form>
+                </div>
+              </div>
+            </form>
+            <div class="mask"></div>
+          </div>
+        </div>
+      </div>
+    </widget>
+    <widget name="box6">
+      <div
+        class="box box6"
+        style="
+          background-image: url('{:cmf_get_image_url($widget.vars.image)}');
+          padding-top: calc(64px + 2rem);
+          padding-bottom: calc(64px + 2rem);
+        "
+      >
+        <div class="info w-full h-full">
+          <div class="container text-white flex flex-col aic h-full">
+            <h2 class="fw-600 text-center">{$widget.vars.title}</h2>
+            <div class="con flex-1 flex flex-col aife jcc w-full">
+              <div class="flex flex-col aifs jcc">
+                <h4 style="font-size: 2em">{$widget.vars.sub_title}</h4>
+                <p>{$widget.vars.des}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </widget>
+    <include file="public@footer" />
+    <include file="public@scripts" />
+    <hook name="before_body_end" />
+    <script>
+      $(".tabs span").click(function () {
+        $(this).addClass("active").siblings().removeClass("active");
+      });
+
+      function change(is,n) {
+       
+        console.log(is);
+        $(is).addClass("active").siblings().removeClass("active");
+       if(n==1){
+        $(is).parents('.tabs').siblings('.img').addClass('black_white').removeClass('color')
+       }else if(n==2){
+        $(is).parents('.tabs').siblings('.img').addClass('color').removeClass('color_img')
+       } 
+      }
+      // 获取表单元素
+    const messageForm = document.getElementById('messageForm');
+
+if (messageForm) {
+    // 监听表单提交事件
+    messageForm.addEventListener('submit', function(event) {
+        // 阻止默认跳转行为
+        event.preventDefault();
+        // 创建 FormData 对象
+        const formData = new FormData(messageForm);
+
+        // 发起请求
+        fetch('/api/portal/colla_application', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('网络响应异常');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('接口响应:', data);
+            // 可以在这里添加处理成功响应的逻辑，例如显示提示信息、跳转页面等
+            if (data.code === 1) {
+                alert('Application submitted successfully');
+                // 可以添加跳转页面的逻辑
+                window.location.href = '/';
+            } else {
+                alert('Application submission failed: ' + data.msg);
+            }
+        })
+        .catch(error => {
+            console.error('请求出错:', error);
+            alert('Request error, please try again later');
+        });
+    });
+}
+function dakai(box){
+  $(box).addClass('open')
+}
+$('.box5 .guan').click(function(){ 
+  $(this).parents('.box5').removeClass('open')
+  $('.mask').hide()
+})   
+    </script> 
+  </body>
+</html>

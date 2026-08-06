@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{$page.post_title}</title>
+    <meta name="keywords" content="{$page.post_keywords}" />
+    <meta name="description" content="{$page.post_excerpt}" />
+    <include file="public@head" />
+    <hook name="before_head_end" />
+  </head>
+  <body class="page-page join-page">
+    <include file="public@nav" />
+    <widget name="box1">
+      <div
+        class="box box1 flex aic jcc"
+        style="
+          background-image: url('{:cmf_get_image_url($widget.vars.image)}');
+          padding-top: calc(64px + 2rem);
+        "
+      >
+        <div class="info flex aic jcc w-full">
+          <div class="container text-white">
+            <h2 class="fw-600">{$widget.vars.title}</h2>
+            <div class="row"><p class="col-md-6">{$widget.vars.des}</p></div>
+            <div class="row mt-3">
+              <div class="col-lg-10 col-xl-8">
+                <div class="h d-flex">
+                  <span>Step</span>
+                  <span>Process</span>
+                </div>
+                <ul>
+                  <foreach name="$widget.vars.step" item="vo">
+                    <li><span class="flex-1 lh-1/5">{$vo.content}</span></li>
+                  </foreach>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </widget>
+
+    <widget name="box2">
+      <div class="box2">
+        <div class="container my-5">
+          <div class="_T pt-4 pb-3 text-white text-center">
+            {$widget.vars.title}
+          </div>
+          <p class="text-center mb-4 mb-lg-5">{$widget.vars.des}</p>
+          <table>
+            <thead>
+              <tr>
+                <th>Brokerage Firm Name</th>
+                <th>Country/Region</th>
+                <th>Support XMAX</th>
+                <th>Jump link</th>
+              </tr>
+            </thead>
+            <tbody>
+              <foreach name="$widget.vars.brokers" item="vo">
+                <tr>
+                  <td>{$vo.brokersName}</td>
+                  <td>{$vo.Country}</td>
+                  <td>
+                    <if condition="$vo.XMAX eq 1"
+                      >
+                      <svg t="1756901157877" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5319" width="32" height="32"><path d="M379.616691 830.25036a88.402878 88.402878 0 0 1-62.471367-25.857842L21.511367 508.758561a29.467626 29.467626 0 0 1 41.696691-41.623021l295.560287 295.560287a29.467626 29.467626 0 0 0 41.696691 0l560.326906-560.326906a29.467626 29.467626 0 0 1 41.696691 41.696691L442.014388 804.392518a88.402878 88.402878 0 0 1-62.397697 25.857842z" fill="#ffffff" p-id="5320"></path></svg>
+                      <elseif condition="$vo.XMAX eq 2" />
+                      <svg t="1756901195262" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1400" width="32" height="32"><path d="M553.696691 512l329.079712-329.079712a29.467626 29.467626 0 0 0-41.696691-41.696691L512 470.303309 182.920288 141.223597a29.467626 29.467626 0 0 0-41.696691 41.696691L470.303309 512l-329.079712 329.079712a29.467626 29.467626 0 0 0 41.696691 41.696691L512 553.696691l329.079712 329.079712a29.467626 29.467626 0 0 0 41.696691-41.696691z" fill="#ffffff" p-id="1401"></path></svg>
+                      <else />
+                    </if>
+                  </td>
+                  <td>
+                    <a href="{$vo.link}" target="_blank"
+                      >[Open an account now]</a
+                    >
+                  </td>
+                </tr>
+              </foreach>
+            </tbody>
+          </table>
+        <p class="mt-4 mt-lg-5 lh-1/6">{$widget.vars.disclaimer}</p>
+        </div>
+      </div>
+    </widget>
+    <widget name="box3">
+      <div class="box3 pt-md-4">
+        <div class="container my-5">
+          <div class="_T pt-4 pb-4">{$widget.vars.title}</div>
+          <!-- <p class="mb-4 mb-lg-5 font-weight" style="max-width: 100%">
+            {$widget.vars.sub_title}
+          </p> -->
+          <div class="row">
+            <div class="col-lg-10 col-xl-8">
+              <div class="lh-1/6" style="white-space: pre-line">
+                {$widget.vars.aq}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </widget>
+    <widget name="box4">
+      <div class="box4 pt-md-4 pb-5">
+        <div class="container my-5">
+          <div class="_T pt-4 pb-3 text-white text-center">
+            {$widget.vars.title}
+          </div>
+          <div class="row list">
+            <foreach name="$widget.vars.process" item="vo">
+              <div class="item col-6 col-md-4 col-lg-2">
+                <div class="sanjiao">
+                  <img src="__TMPL__/public/assets/images/sanjiao.png" alt="" />
+                </div>
+                <div class="con h-full d-flex flex-col aic jcc">
+                  <span>{$vo.content}</span>
+                </div>
+              </div>
+            </foreach>
+          </div>
+        </div>
+      </div>
+    </widget>
+    <widget name="box5">
+      <div
+        class="box box5 flex aic jcc"
+        style="
+          background-image: url('{:cmf_get_image_url($widget.vars.image)}');
+        "
+      >
+        <video
+          autoplay
+          muted
+          loop
+          src="{:cmf_get_image_url($widget.vars.video)}"
+          class="d-none d-lg-block pos-a"
+        ></video>
+        <div class="info flex aic jcc">
+          <div class="container text-white">
+            <h2 class="fw-600">{$widget.vars.title}</h2>
+            <div class="row jcfe">
+              <p class="col-lg-4">{$widget.vars.des}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </widget>
+
+    <widget name="box6">
+      <div class="box6 pt-md-4 pb-5" style="
+          background-image: url('{:cmf_get_image_url($widget.vars.image)}');">
+        <div class="container my-5">
+          <div class="_T pt-4 pb-3 text-white text-center">
+            {$widget.vars.title}
+          </div>
+          <div class="row list">
+            <foreach name="$widget.vars.list" item="vo">
+              <div class="item col-6 col-md-3 mt-5">
+                <div class="con p-4 text-center flex flex-col aic jcc h-full">
+                  <h4 class="lh-1/5">{$vo.name}</h4>
+                  <a
+                    href="{:cmf_get_image_url($vo.file)}"
+                    download="{$vo.name}"
+                    target="_blank"
+                    class="cu-btn rounded"
+                    >Download</a
+                  >
+                </div>
+              </div>
+            </foreach>
+          </div>
+        </div>
+      </div>
+    </widget>
+    <include file="public@footer" />
+    <include file="public@scripts" />
+    <hook name="before_body_end" />
+  </body>
+</html>
