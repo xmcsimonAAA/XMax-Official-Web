@@ -48,3 +48,5 @@ Route::get('timeSeries/cronFetch', 'portal/TimeSeries/cronFetch');
 Route::get('timeSeries/getDataFromYahoo', 'portal/TimeSeries/getDataFromYahoo');
 Route::get('timeSeries/getQuote', 'portal/TimeSeries/getQuote');
 Route::get('timeSeries/fetchQuote', 'portal/TimeSeries/fetchQuote');
+Route::get('timeSeries/clearCache', 'portal/TimeSeries/clearCache');
+Route::get('timeSeries/forceRefresh', 'portal/TimeSeries/forceRefresh');

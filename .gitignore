@@ -22,3 +22,16 @@ Vagrantfile
 .env.*
 !.env.example
 /config
+
+# Private deployment backups and signing material
+/backups/
+/data/backups/
+*.sql.gz
+*.sql.zip
+*.sql.bz2
+*.dump
+*.dump.gz
+*.pem
+*.key
+*.p12
+*.pfx

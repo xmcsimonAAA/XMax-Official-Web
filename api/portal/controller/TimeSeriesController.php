@@ -17,7 +17,7 @@ use think\facade\Cache;
 
 class TimeSeriesController extends RestBaseController
 {
-    // API配置
+   // API配置
     private $apiKey = '';
     private $apiKey2 = '';
     private $baseUrl = 'https://api.twelvedata.com';
@@ -27,6 +27,7 @@ class TimeSeriesController extends RestBaseController
     private $order = 'asc';
     private $limitBeing = 8; //每分钟限制8次请求
     private $limitDaily = 800;  // 每天限制800次请求
+
 
     protected function initialize()
     {
@@ -43,7 +44,6 @@ class TimeSeriesController extends RestBaseController
         $openingDate = $this->getCurrentOrLastOpeningDate();
 
         // 从当前日期开始往前找，直到找到有缓存数据的一天
-        // $foundDate = null;
         $allData = [];
 
         for ($i = 0; $i <= 7; $i++) {
@@ -52,18 +52,27 @@ class TimeSeriesController extends RestBaseController
             $allData = Cache::get($cacheKey, []);
 
             if (!empty($allData)) {
-                // $foundDate = $checkDate;
                 break;
             }
         }
 
-        // 如果没找到任何数据
+        $quoteCacheKey = 'quote_data_' . $this->symbol;
+        $quoteData = Cache::get($quoteCacheKey, []);
+
+        // 兜底：若缓存完全为空（首次部署或全过期），调用带自愈的读取逻辑
+        if (empty($allData) && empty($quoteData)) {
+            $completeData = $this->getLastCompleteData(true);
+            if ($completeData['timeSeries'] !== '无数据') {
+                $allData = $completeData['timeSeries'];
+            }
+            if ($completeData['quote'] !== '无数据') {
+                $quoteData = $completeData['quote'];
+            }
+        }
+
         if (empty($allData)) {
             $allData = '无数据';
         }
-
-        $quoteCacheKey = 'quote_data_' . $this->symbol;
-        $quoteData = Cache::get($quoteCacheKey, []);
 
         if (empty($quoteData)) {
             $quoteData = '无数据';
@@ -85,6 +94,11 @@ class TimeSeriesController extends RestBaseController
             $cacheKey = 'time_series_data_' . $date;
             Cache::delete($cacheKey);
         }
+        Cache::delete('quote_data_' . $this->symbol);
+        Cache::delete('last_full_data');
+        Cache::delete('time_series_last_bootstrap');
+        Cache::delete('time_series_bootstrap_lock');
+        Cache::delete('time_series_self_heal_lock');
 
         $this->success('缓存已清空');
     }
@@ -158,9 +172,9 @@ class TimeSeriesController extends RestBaseController
 
         $apiKey = $limitCheck['key'];
 
-        $nyNow = new \DateTime('now', new \DateTimeZone('America/New_York'));
-        $startDate = $nyNow->format('Y-m-d');
-        $endDate = $nyNow->modify('+1 days')->format('Y-m-d');
+        // 使用最近一个交易日作为起始日，避免今天尚未产生数据导致接口返回空
+        $startDate = $this->getCurrentOrLastOpeningDate();
+        $endDate = date('Y-m-d', strtotime("{$startDate} +1 day"));
         $url = "{$this->baseUrl}/time_series?apikey={$apiKey}&symbol={$this->symbol}&exchange={$this->exchange}&interval={$this->interval}&order={$this->order}&start_date={$startDate}&end_date={$endDate}";
 
         $response = $this->httpGet($url);
@@ -212,6 +226,7 @@ class TimeSeriesController extends RestBaseController
             'allCount' => count($data['values']),
             'addCount' => $addCount,
             'updateCount' => $updateCount,
+            'data' => $mergedData,
             'keyInfo' => [
                 'prefix' => $limitCheck['prefix'],
                 'usedMinute' => $usedMinute,
@@ -542,7 +557,6 @@ class TimeSeriesController extends RestBaseController
         Cache::set('last_time_series_fetch_time', time(), 10);
 
         $url = "{$this->baseUrl}/price?apikey={$this->apiKey2}&symbol={$this->symbol}";
-
         // 发起HTTP请求
         $response = $this->httpGet($url);
 
@@ -551,7 +565,6 @@ class TimeSeriesController extends RestBaseController
         }
 
         $data = json_decode($response, true);
-
         if (!isset($data['price']) || !is_numeric($data['price'])) {
             $this->error('API返回数据格式错误');
         }
@@ -573,7 +586,6 @@ class TimeSeriesController extends RestBaseController
         $apiKey = $limitCheck['key'];
 
         $url = "{$this->baseUrl}/quote?symbol={$this->symbol}&apikey={$apiKey}";
-
         $response = $this->httpGet($url);
 
         if (!$response) {
@@ -643,13 +655,37 @@ class TimeSeriesController extends RestBaseController
     {
         // $this->clearCache();
         if (!$this->isInTradingWindow()) {
-            // 不在交易时段，检查是否在收盘后30分钟内
-            $this->fetchAfterHours();
+            // 收盘后30分钟内（16:00-16:30）仍需刷新一次，其余非交易时段返回最后一次完整数据
+            $nyNow = new \DateTime('now', new \DateTimeZone('America/New_York'));
+            $dayOfWeek = (int)$nyNow->format('w');
+
+            if ($dayOfWeek !== 0 && $dayOfWeek !== 6) {
+                $currentTime = (int)$nyNow->format('G') * 60 + (int)$nyNow->format('i');
+
+                if ($currentTime >= 16 * 60 && $currentTime < 16 * 60 + 30) {
+                    $timeSeriesResult = $this->fetchAndSaveData();
+                    $quoteResult = $this->fetchQuoteData();
+                    $this->saveLastFullData($timeSeriesResult, $quoteResult);
+                    cmf_log('cronFetch[收盘后] 刷新完成');
+                    $this->success('收盘后数据获取成功', [
+                        'timeSeries' => $timeSeriesResult,
+                        'quote' => $quoteResult
+                    ]);
+                    return;
+                }
+            }
+
+            // 非交易时段：优先读 last_full_data，若完全为空则自愈抓取一次最近交易日数据
+            $data = $this->getLastCompleteData(true);
+            cmf_log('cronFetch[非交易] 返回 last_full_data');
+            $this->success('非交易时段，返回最后一次完整数据', $data);
             return;
         }
 
         $timeSeriesResult = $this->fetchAndSaveData();
         $quoteResult = $this->fetchQuoteData();
+        $this->saveLastFullData($timeSeriesResult, $quoteResult);
+        cmf_log('cronFetch[交易时段] 刷新完成');
 
         $this->success('数据获取成功', [
             'timeSeries' => $timeSeriesResult,
@@ -658,37 +694,206 @@ class TimeSeriesController extends RestBaseController
     }
 
     /**
-     * 收盘后30分钟内请求数据
+     * 将最后一次成功的完整数据持久化到固定 key，供非交易时段直接读取
+     * @param array $timeSeriesResult fetchAndSaveData 的返回
+     * @param array $quoteResult fetchQuoteData 的返回
      */
-    private function fetchAfterHours()
+    private function saveLastFullData($timeSeriesResult, $quoteResult)
     {
-        $nyNow = new \DateTime('now', new \DateTimeZone('America/New_York'));
-        $dayOfWeek = (int)$nyNow->format('w');
-        
-        // 周末不请求
-        if ($dayOfWeek === 0 || $dayOfWeek === 6) {
-            $this->error('当前不在美股交易时段');
+        $timeSeries = ($timeSeriesResult['success'] ?? false) && !empty($timeSeriesResult['data'])
+            ? $timeSeriesResult['data']
+            : Cache::get('time_series_data_' . $this->getCurrentOrLastOpeningDate(), []);
+
+        $quote = !empty($quoteResult['data'])
+            ? $quoteResult['data']
+            : Cache::get('quote_data_' . $this->symbol, []);
+
+        if (empty($timeSeries) && empty($quote)) {
+            cmf_log('saveLastFullData 跳过：timeSeries 和 quote 都为空');
+            return;
         }
 
-        // 判断是否在收盘后30分钟内（16:00-16:30）
-        $hour = (int)$nyNow->format('G');
-        $minute = (int)$nyNow->format('i');
-        $currentTime = $hour * 60 + $minute;
-        
-        $closingTime = 16 * 60; // 16:00
-        $afterHoursEnd = 16 * 60 + 30; // 16:30
-        
-        if ($currentTime < $closingTime || $currentTime >= $afterHoursEnd) {
-            $this->error('当前不在美股交易时段，且不在收盘后30分钟内');
+        // TTL=0：永久缓存，避免过期后非交易时段读不到；仅通过 clearCache 主动清理
+        Cache::set('last_full_data', [
+            'timeSeries' => $timeSeries,
+            'quote' => $quote,
+            'saved_at' => time(),
+        ], 0);
+        cmf_log('saveLastFullData 成功写入 last_full_data');
+    }
+
+    /**
+     * 从缓存中获取最后一次完整数据（非交易时段回退用）
+     * @param bool $autoFetch 当缓存全空时是否主动抓取一次最近交易日数据（避免 TTL 过期后长期空白）
+     * @return array
+     */
+    private function getLastCompleteData($autoFetch = false)
+    {
+        // 优先读取持久化的最后一次完整数据
+        $lastFull = Cache::get('last_full_data');
+        if (!empty($lastFull['timeSeries']) || !empty($lastFull['quote'])) {
+            return [
+                'timeSeries' => !empty($lastFull['timeSeries']) ? $lastFull['timeSeries'] : '无数据',
+                'quote' => !empty($lastFull['quote']) ? $lastFull['quote'] : '无数据',
+            ];
         }
 
-        $timeSeriesResult = $this->fetchAndSaveData();
-        $quoteResult = $this->fetchQuoteData();
+        // last_full_data 为空时，回退为从最近交易日缓存中查找
+        $openingDate = $this->getCurrentOrLastOpeningDate();
 
-        $this->success('收盘后数据获取成功', [
-            'timeSeries' => $timeSeriesResult,
-            'quote' => $quoteResult
+        $allData = [];
+        for ($i = 0; $i <= 7; $i++) {
+            $checkDate = date('Y-m-d', strtotime("{$openingDate} -{$i} days"));
+            $allData = Cache::get('time_series_data_' . $checkDate, []);
+            if (!empty($allData)) {
+                break;
+            }
+        }
+
+        $quoteData = Cache::get('quote_data_' . $this->symbol, []);
+
+        // 自愈：缓存全空时（TTL 过期或首次部署），主动抓取一次最近交易日数据
+        if ($autoFetch && empty($allData) && empty($quoteData)) {
+            cmf_log('getLastCompleteData 触发自愈抓取（last_full_data 与缓存均为空）');
+            try {
+                $lockKey = 'time_series_self_heal_lock';
+                if (!Cache::get($lockKey)) {
+                    Cache::set($lockKey, 1, 300);
+
+                    $tsResult = $this->fetchAndSaveData();
+                    $qResult = $this->fetchQuoteData();
+                    $this->saveLastFullData($tsResult, $qResult);
+
+                    if (!empty($tsResult['data'])) {
+                        $allData = $tsResult['data'];
+                    }
+                    if (!empty($qResult['data'])) {
+                        $quoteData = $qResult['data'];
+                    }
+                }
+            } catch (\Throwable $e) {
+                cmf_log('getLastCompleteData 自愈异常：' . $e->getMessage());
+            } finally {
+                Cache::delete($lockKey);
+            }
+        }
+
+        return [
+            'timeSeries' => empty($allData) ? '无数据' : $allData,
+            'quote' => empty($quoteData) ? '无数据' : $quoteData,
+        ];
+    }
+
+    /**
+     * 强制刷新指定日期的数据（绕过交易时段限制，用于手动调试/首次部署）
+     * @param string|null $date 指定日期 Y-m-d，为空则自动取最近交易日
+     * @param string $type all|timeSeries|quote  刷新类型
+     */
+    public function forceRefresh()
+    {
+        $date = $this->request->param('date', '');
+        $type = $this->request->param('type', 'all');
+
+        // 清空当前 key 锁，确保可以立即请求
+        Cache::delete('time_series_self_heal_lock');
+
+        $result = [];
+
+        // 处理 timeSeries 数据
+        if ($type === 'all' || $type === 'timeSeries') {
+            $tsResult = $this->forceFetchTimeSeries($date);
+            $result['timeSeries'] = $tsResult;
+        }
+
+        // 处理 quote 数据
+        if ($type === 'all' || $type === 'quote') {
+            $qResult = $this->fetchQuoteData();
+            $result['quote'] = $qResult;
+        }
+
+        // 成功后写入 last_full_data
+        if (isset($result['timeSeries']) && isset($result['quote'])) {
+            $this->saveLastFullData($result['timeSeries'], $result['quote']);
+        } elseif (isset($result['timeSeries'])) {
+            // 只刷 timeSeries 时，尝试保留已有 quote
+            $cachedQuote = Cache::get('quote_data_' . $this->symbol, []);
+            $this->saveLastFullData($result['timeSeries'], ['data' => $cachedQuote]);
+        } elseif (isset($result['quote'])) {
+            $cachedTS = Cache::get('time_series_data_' . ($date ?: $this->getCurrentOrLastOpeningDate()), []);
+            $this->saveLastFullData(['success' => true, 'data' => $cachedTS], $result['quote']);
+        }
+
+        $this->success('强制刷新完成', [
+            'requested_date' => $date ?: 'auto',
+            'type' => $type,
+            'result' => $result,
         ]);
+    }
+
+    /**
+     * 强制获取指定日期的 timeSeries 数据
+     * @param string|null $date
+     * @return array
+     */
+    private function forceFetchTimeSeries($date = null)
+    {
+        $limitCheck = $this->checkRequestLimit();
+        if (!$limitCheck['allowed']) {
+            return ['success' => false, 'error' => '请求频率超限'];
+        }
+
+        $apiKey = $limitCheck['key'];
+
+        // 如果指定了日期，直接用；否则用最近交易日
+        $startDate = $date ?: $this->getCurrentOrLastOpeningDate();
+        $endDate = date('Y-m-d', strtotime("{$startDate} +1 day"));
+
+        $url = "{$this->baseUrl}/time_series?apikey={$apiKey}&symbol={$this->symbol}&exchange={$this->exchange}&interval={$this->interval}&order={$this->order}&start_date={$startDate}&end_date={$endDate}";
+
+        cmf_log("forceFetchTimeSeries 请求日期：{$startDate} → {$endDate}");
+        $response = $this->httpGet($url);
+
+        if (!$response) {
+            return ['success' => false, 'error' => 'API请求失败'];
+        }
+
+        $data = json_decode($response, true);
+        if (!isset($data['values']) || !is_array($data['values'])) {
+            $errorMsg = 'API返回数据格式错误';
+            cmf_log($errorMsg . ': ' . substr($response, 0, 500));
+            return ['success' => false, 'error' => $errorMsg];
+        }
+
+        $this->incrementKeyCount($limitCheck['prefix']);
+
+        // 获取已有缓存数据进行合并
+        $cacheKey = 'time_series_data_' . $startDate;
+        $existingData = Cache::get($cacheKey, []);
+
+        $existingDates = array_column($existingData, 'datetime');
+        $addCount = 0;
+        foreach ($data['values'] as $item) {
+            if (!in_array($item['datetime'], $existingDates)) {
+                $addCount++;
+            }
+        }
+
+        $mergeResult = $this->mergeTimeSeriesData($existingData, $data['values']);
+        $mergedData = $mergeResult['data'];
+        $updateCount = $mergeResult['updateCount'];
+
+        Cache::set($cacheKey, $mergedData, 604800);
+
+        cmf_log("forceFetchTimeSeries 成功：{$startDate} 共 " . count($data['values']) . " 条，新增 {$addCount}，更新 {$updateCount}");
+
+        return [
+            'success' => true,
+            'date' => $startDate,
+            'allCount' => count($data['values']),
+            'addCount' => $addCount,
+            'updateCount' => $updateCount,
+            'data' => $mergedData,
+        ];
     }
 
     /**
@@ -715,4 +920,6 @@ class TimeSeriesController extends RestBaseController
         curl_close($ch);
         return $response;
     }
+
+
 }
