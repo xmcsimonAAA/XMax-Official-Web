@@ -16,6 +16,30 @@
       .content-box .content table tr {
         background: none !important;
       }
+      .content-box .content img {
+        display: block;
+        max-width: 100% !important;
+        height: auto !important;
+        margin: 1.5rem auto;
+      }
+      .content-box .content table {
+        display: block;
+        width: 100% !important;
+        max-width: 100%;
+        overflow-x: auto;
+        border-collapse: collapse;
+      }
+      .content-box .content th,
+      .content-box .content td {
+        padding: 0.5rem;
+        border: 1px solid #ddd;
+      }
+      .content-box .external-source-link {
+        display: inline-block;
+        margin-top: 1rem;
+        color: var(--color);
+        text-decoration: underline;
+      }
     </style>
   </head>
   <body class="page-page article-page">
@@ -36,7 +60,13 @@
         <div class="container text-black py-5">
           <div class="h flex aic">
             <div class="dian"></div>
-            <div class="by font-bold">{$article.original_author}</div>
+            <if condition="!empty($article.more.external_source)">
+              <div class="by font-bold">
+                <if condition="$article.more.external_source == 'globenewswire'">GlobeNewswire<else />SEC</if>
+              </div>
+              <else />
+              <div class="by font-bold">{$article.original_author}</div>
+            </if>
             <div class="d-flex ml-3 share">
               <span>Share</span> <i class="iconfont icon-fenxiang ml-2"></i>
               <div class="share-box">
@@ -84,6 +114,15 @@
               </h4>
             </notempty>
             <div class="content">{$article.post_content|raw}</div>
+            <notempty name="article.more.external_url">
+              <a
+                class="external-source-link"
+                href="{$article.more.external_url}"
+                target="_blank"
+                rel="noopener noreferrer"
+                >View original source</a
+              >
+            </notempty>
             <div class="fujian">
               <notempty name="article.more.files">
                 <foreach

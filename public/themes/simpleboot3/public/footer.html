@@ -1,6 +1,6 @@
 <footer>
   <div class="box10">
-    <if condition="$theme_vars['footerVideo']">
+    <if condition="!empty($theme_vars['footerVideo'])">
       <video
         autoplay
         muted
@@ -43,15 +43,17 @@
   <div class="box11 py-5">
     <div class="container">
       <div class="flex aic jcc" style="gap: 1.5rem">
-        <foreach name="$theme_vars['app']" item="vo">
-          <a href="{$vo.link}" target="_blank">
-            <img
-              src="{:cmf_get_image_url($vo.logo)}"
-              class="d-block h-32"
-              alt="{$vo.name}"
-            />
-          </a>
-        </foreach>
+        <if condition="!empty($theme_vars['app'])">
+          <foreach name="$theme_vars['app']" item="vo">
+            <a href="{$vo.link}" target="_blank">
+              <img
+                src="{:cmf_get_image_url($vo.logo)}"
+                class="d-block h-32"
+                alt="{$vo.name}"
+              />
+            </a>
+          </foreach>
+        </if>
         <!-- <a href="">
           <img
             src="__TMPL__/public/assets/images/icon-2.png"
